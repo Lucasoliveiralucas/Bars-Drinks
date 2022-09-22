@@ -1,0 +1,125 @@
+.header {
+  background-color: #354f52;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  /* margin: 1rem; */
+  justify-content: space-between;
+}
+input {
+  height: 1.5rem;
+  border-radius: 100px;
+  width: 20rem;
+  border: none;
+}
+.drink-container-img {
+  display: flex;
+  overflow: scroll;
+  z-index: 1;
+}
+.drink-container-img::-webkit-scrollbar {
+  display: none;
+}
+.drink-img {
+  padding: 0.5rem;
+  position: relative;
+}
+.drink-img :hover {
+  transform: scale(1.05);
+}
+.drink-img-text {
+  position: absolute;
+  text-shadow: 2px 3px black;
+  z-index: 2;
+  bottom: 0.2rem;
+}
+.drink-container-text {
+  z-index: 3;
+  position: absolute;
+  background-color: rgba(201, 201, 201, 0.92);
+  width: 20rem;
+  border-radius: 5px;
+}
+.drink-text h4 {
+  margin-left: 1rem;
+  color: #2f3e46;
+}
+img {
+  height: 15rem;
+  border-radius: 5px;
+}
+
+a {
+  color: #cad2c5;
+  text-decoration: none;
+}
+h2 {
+  margin-left: 0.5rem;
+}
+.details-container {
+  margin: 2rem;
+}
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.details-body {
+  display: flex;
+}
+.details-img {
+  height: 20rem;
+}
+.details-text {
+  margin-left: 7rem;
+}
+.details-ingredients {
+  display: flex;
+  justify-content: space-between;
+}
+.reviews-container {
+  display: flex;
+}
+.bar-review {
+  display: flex;
+  align-items: center;
+}
+.bar-review h4 {
+  margin-right: 2rem;
+}
+.bar-review svg {
+  color: rgb(255, 157, 0);
+  margin-right: 0.5rem;
+}
+.rating-popup-true {
+  padding-left: 1.5%;
+  left: 35%;
+  width: 30%;
+  height: 17rem;
+  background-color: rgba(166, 163, 163, 0.938);
+  position: absolute;
+  border-radius: 5px;
+}
+.rating-popup-true input {
+  width: 80%;
+  border-radius: 0px;
+}
+#comment-input {
+  height: 5rem;
+}
+#close-rating {
+  border: none;
+  background-color: transparent;
+  margin: 0.5rem;
+  float: right;
+}
+#close-rating:hover {
+  background-color: rgb(214, 21, 21);
+}
+.rating-popup-true p {
+  margin-top: 2rem;
+  color: black;
+}
+.rating-popup-false {
+  display: none;
+}
