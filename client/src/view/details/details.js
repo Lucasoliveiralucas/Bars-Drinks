@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import List from "../../List/list";
+import ReviewItem from "../../List/items/review-item";
 import Rating from "./components/rating";
 const getReview = require("./utils");
 const Details = () => {
@@ -80,7 +80,11 @@ const Details = () => {
           <h3>{drink.strInstructions}</h3>
         </div>
       </div>
-      <List data={reviews} type="review text" />
+      <div className="reviews-container">
+        {reviews.map((item) => (
+          <ReviewItem data={item} key={item} />
+        ))}
+      </div>
     </div>
   );
 };

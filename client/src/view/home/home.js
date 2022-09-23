@@ -1,12 +1,12 @@
-import List from "../../List/list";
 import { useEffect, useState } from "react";
-
+import ItemImg from "../../List/items/drink-item-img";
+// const { env } = require("../../../env");
 function Home() {
   const [popular, setPopular] = useState([]);
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "97323259c3mshb808de60331839cp13854cjsnee8ba1559688",
+      "X-RapidAPI-Key": "",
       "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
     },
   };
@@ -20,7 +20,11 @@ function Home() {
     <div className="Home">
       <div>
         <h2>Popular this Week</h2>
-        <List data={popular} type="img" />
+        <div className="drink-container-img">
+          {popular.map((item) => (
+            <ItemImg data={item} key={item.idDrink} />
+          ))}
+        </div>
       </div>
     </div>
   );

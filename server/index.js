@@ -7,8 +7,8 @@ const cors = require("cors");
 const router = require("./router");
 
 const corsOptions = {
-  origin: "http://localhost:3003",
-  optionsSucessStatus: 200,
+  // origin: "http://localhost:3003",
+  // optionsSucessStatus: 200,
 };
 
 app.use(cors(corsOptions));

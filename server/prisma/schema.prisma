@@ -8,12 +8,13 @@ datasource db {
 }
 
 model Reviews {
-  id       Int    @id @default(autoincrement())
-  drink_id String @db.VarChar(255)
+  id       Int     @id @default(autoincrement())
+  drink_id String  @db.VarChar(50)
   userId   Int
-  rating_  Int    @map("“rating”")
-  bar      String @db.VarChar(255)
-  User     User   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  rating_  Int     @map("“rating”")
+  bar      String  @db.VarChar(50)
+  comment  String? @db.VarChar(255)
+  User     User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model User {

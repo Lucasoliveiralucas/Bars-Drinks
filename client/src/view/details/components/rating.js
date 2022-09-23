@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Bars from "./bars";
 
 const Rating = ({ drinkId, userId }) => {
@@ -8,6 +8,7 @@ const Rating = ({ drinkId, userId }) => {
     bar: null,
     score: null,
   });
+  const [testBar, setTestBar] = useState(""); //should be a bar closest to written string
   const [popUp, setPopUp] = useState(false);
   const handleSubmit = (data) => {
     data.preventDefault();
@@ -42,7 +43,7 @@ const Rating = ({ drinkId, userId }) => {
             type="text"
             name="bar"
             placeholder="Bar..."
-            onChange={(e) => setRating({ ...rating, bar: e.target.value })}
+            onChange={(e) => setTestBar(e.target.value)}
           ></input>
           <p>Comment</p>
           <input id="comment-input" type="text" name="comment"></input>
@@ -56,7 +57,7 @@ const Rating = ({ drinkId, userId }) => {
         </div>
       </form>
       <div>
-        <Bars data={rating} hook={setRating} />
+        <Bars hook={setRating} data={testBar} rating={rating} />
       </div>
     </div>
   );

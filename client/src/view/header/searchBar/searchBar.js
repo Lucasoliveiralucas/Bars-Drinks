@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { useEffect, useState } from "react";
-import List from "../../../List/list";
+import ItemText from "../../../List/items/drink-item-text";
+// require("dotenv").config();
+
 const SearchBar = () => {
   const [search, setDrink] = useState("");
   const [display, setDisplay] = useState([]);
@@ -14,8 +16,7 @@ const SearchBar = () => {
         const options = {
           method: "GET",
           headers: {
-            "X-RapidAPI-Key":
-              "97323259c3mshb808de60331839cp13854cjsnee8ba1559688",
+            "X-RapidAPI-Key": "",
             "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
           },
         };
@@ -40,7 +41,15 @@ const SearchBar = () => {
           onChange={(e) => setDrink(e.target.value)}
         ></input>
       </form>
-      <List data={display.drinks} type="item text" />
+      <div className="drink-container-text">
+        {display.drinks ? (
+          display.drinks.map((item) => (
+            <ItemText data={item} key={item.idDrink} />
+          ))
+        ) : (
+          <></>
+        )}
+      </div>
     </>
   );
 };
