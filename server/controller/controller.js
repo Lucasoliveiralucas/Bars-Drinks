@@ -7,6 +7,7 @@ const SALT = process.env.SALT;
 
 const createUser = async (req, res) => {
   try {
+    console.log(req.body);
     const user = await prisma.user.findFirst({
       where: { email: req.body.email },
     });
@@ -14,7 +15,7 @@ const createUser = async (req, res) => {
     if (user)
       return res
         .status(409)
-        .send({ error: "409", message: "User already exists" });
+        .json({ error: "409", message: "Email already registered" });
     if (password < 8)
       return res.status(409).send({
         error: "409",
@@ -33,7 +34,7 @@ const createUser = async (req, res) => {
     const accessToken = jwt.sign({ id }, SECRET_KEY);
     res.status(201).send({ accessToken });
   } catch (error) {
-    res.json("error");
+    res.json({ message: "error" });
     console.log(error);
   }
 };
@@ -52,7 +53,6 @@ const users = async (req, res) => {
 };
 const login = async (req, res) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
     const currentUser = await prisma.user.findFirst({
       where: { email: email },
