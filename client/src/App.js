@@ -3,11 +3,15 @@ import "./App.css";
 import Home from "./view/home/home";
 import Details from "./view/details/details";
 import Header from "./view/header/header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Register from "./view/register/register";
 
 function App() {
   const [logged, setLogged] = useState(false);
+  useEffect(() => {
+    const res = localStorage.getItem("accessToken");
+    res ? setLogged(true) : setLogged(false);
+  }, []);
   return (
     <div>
       <BrowserRouter>

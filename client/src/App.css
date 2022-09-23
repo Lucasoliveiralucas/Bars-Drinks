@@ -6,6 +6,24 @@
   /* margin: 1rem; */
   justify-content: space-between;
 }
+.home {
+  display: flex;
+}
+.categories-container {
+  background-color: #354f52;
+  margin-right: 2rem;
+}
+.home-logged-out {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+.home-logged-out-list {
+  margin-left: 1.5rem;
+}
+.home-logged-out .drink-container-img {
+  width: 85vw;
+}
 input {
   height: 1.5rem;
   border-radius: 100px;
@@ -13,9 +31,11 @@ input {
   border: none;
 }
 .drink-container-img {
+  width: 85vw;
   display: flex;
   overflow: scroll;
   z-index: 1;
+  margin-bottom: 3rem;
 }
 .drink-container-img::-webkit-scrollbar {
   display: none;
@@ -135,4 +155,30 @@ h2 {
 }
 .login-container-not {
   display: none;
+}
+.register-container {
+  background-color: rgba(255, 255, 255, 0.097);
+  border-radius: 5px;
+  width: 100%;
+  height: 35rem;
+  padding-left: 1rem;
+  margin-right: 1rem;
+  box-shadow: 2px 3px rgba(0, 0, 0, 0.258);
+}
+.register-container input {
+  width: 15rem;
+  border-radius: 5px;
+  margin-bottom: 0rem;
+}
+.register-container button {
+  border-radius: 10px;
+  float: right;
+  margin-top: 0.7rem;
+  margin-right: 1rem;
+}
+.register-container h4 {
+  margin-top: 0.5rem;
+}
+#register-name-text {
+  padding-top: 1rem;
 }

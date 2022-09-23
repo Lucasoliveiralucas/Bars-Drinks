@@ -109,6 +109,35 @@ const register = (user) => {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 };
+
+const getCategories = () => {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": RAPID_API_KEY,
+      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+    },
+  };
+  return fetch(
+    "https://the-cocktail-db.p.rapidapi.com/list.php?c=list",
+    options
+  ).then((response) => response.json());
+};
+
+const getMultipleRandom = () => {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": RAPID_API_KEY,
+      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+    },
+  };
+
+  return fetch(
+    "https://the-cocktail-db.p.rapidapi.com/randomselection.php",
+    options
+  ).then((response) => response.json());
+};
 module.exports = {
   getPopular,
   getSearch,
@@ -117,4 +146,6 @@ module.exports = {
   getReview,
   login,
   register,
+  getCategories,
+  getMultipleRandom,
 };

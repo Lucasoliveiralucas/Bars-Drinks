@@ -57,7 +57,7 @@ const Details = () => {
               <h2>Ingredients</h2>
               {ingredients.map((item) => (
                 <li>
-                  {item.ingredient} {item.measure}
+                  {item.ingredient} - {item.measure}
                 </li>
               ))}
             </div>

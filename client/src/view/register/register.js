@@ -30,9 +30,9 @@ const Register = (props) => {
     e.target.value.reset();
   };
   return (
-    <div>
+    <div className="register-container">
       <form onSubmit={(e) => handleSubmit(e)}>
-        <h4>Name *</h4>
+        <h4 id="register-name-text">Name *</h4>
         <input
           type="text"
           name="name"
