@@ -9,7 +9,7 @@ const Header = () => {
       <div>
         <SearchBar />
       </div>
-      {/* <Login /> */}
+      <Login />
     </div>
   );
 };

@@ -123,3 +123,16 @@ h2 {
 .rating-popup-false {
   display: none;
 }
+.login-container-visible {
+  height: 25rem;
+  width: 22rem;
+  background-color: rgb(97, 95, 95);
+  position: absolute;
+  z-index: 4;
+  align-self: center;
+  left: 38%;
+  top: 38%;
+}
+.login-container-not {
+  display: none;
+}

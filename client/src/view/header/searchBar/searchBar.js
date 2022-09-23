@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import ItemText from "../../../List/items/drink-item-text";
-// require("dotenv").config();
+const { getSearch } = require("../../../services/api");
 
 const SearchBar = () => {
   const [search, setDrink] = useState("");
@@ -11,23 +11,12 @@ const SearchBar = () => {
   useEffect(() => {
     clearTimeout(timeout.current);
     function getMovie(drink) {
-      if (!drink.length) return setDisplay([]);
       timeout.current = setTimeout(() => {
-        const options = {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Key": "",
-            "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
-          },
+        const getter = async () => {
+          const data = await getSearch(drink);
+          search ? setDisplay(data) : setDisplay([]);
         };
-
-        fetch(
-          `https://the-cocktail-db.p.rapidapi.com/search.php?s=${drink}`,
-          options
-        )
-          .then((response) => response.json())
-          .then((response) => setDisplay(response))
-          .catch((err) => console.error(err));
+        getter();
       }, 100);
     }
     getMovie(search);

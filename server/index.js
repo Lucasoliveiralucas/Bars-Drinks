@@ -2,13 +2,14 @@
 
 const express = require("express");
 const app = express();
-const port = 3010;
+const port = 3011;
 const cors = require("cors");
 const router = require("./router");
 
 const corsOptions = {
-  // origin: "http://localhost:3003",
-  // optionsSucessStatus: 200,
+  origin: "http://localhost:3002",
+  credentials: true,
+  optionsSucessStatus: 200,
 };
 
 app.use(cors(corsOptions));

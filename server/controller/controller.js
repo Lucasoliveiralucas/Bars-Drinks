@@ -1,44 +1,75 @@
-// "use strict";
-//
-// const getReview = async (req, res) => {};
-//
-// const postReview = async (req, res) => {};
-//
-// module.exports = { getReview, postReview };
-
 const { PrismaClient } = require("@prisma/client");
-
 const prisma = new PrismaClient();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const SECRET_KEY = process.env.SECRET_KEY;
+const SALT = process.env.SALT;
 
 const createUser = async (req, res) => {
-  await prisma.user.create({
-    data: {
-      name: "Lucas",
-      email: "lucas@email",
-      Reviews: {
-        create: [
-          {
-            drink_id: "1237863",
-            rating_: 33,
-            bar: "wilson2",
-          },
-        ],
+  try {
+    const user = await prisma.user.findFirst({
+      where: { email: req.body.email },
+    });
+    const password = req.body.password;
+    if (user)
+      return res
+        .status(409)
+        .send({ error: "409", message: "User already exists" });
+    if (password < 8)
+      return res.status(409).send({
+        error: "409",
+        message: "Password must be at least 8 characters",
+      });
+    const hash = bcrypt.hashSync(password, +SALT);
+    await prisma.user.create({
+      data: {
+        ...req.body,
+        password: hash,
       },
-    },
-  });
+    });
+    const { id } = await prisma.user.findFirst({
+      where: { email: req.body.email },
+    });
+    const accessToken = jwt.sign({ id }, SECRET_KEY);
+    res.status(201).send({ accessToken });
+  } catch (error) {
+    res.json("error");
+    console.log(error);
+  }
 };
-
+//test function to check for users in database
 const users = async (req, res) => {
   try {
-    const allUsers = await prisma.user.findMany();
+    // const allUsers = await prisma.user.findFirst({
+    //   where: { name: "Testuser" },
+    // });
+    const allUsers = await prisma.user.findMany({});
     res.json(allUsers);
     console.log(allUsers);
   } catch (error) {
     res.json("error getting users");
   }
 };
+const login = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { email, password } = req.body;
+    const currentUser = await prisma.user.findFirst({
+      where: { email: email },
+    });
+    const validatedPass = await bcrypt.compare(password, currentUser.password);
+    if (!validatedPass) throw new Error();
+    const accessToken = jwt.sign({ id: currentUser.id }, SECRET_KEY);
+    res.status(200).send({ accessToken });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(401)
+      .send({ error: "401", message: "Username or password is incorrect" });
+  }
+};
 const drinkReviews = async (req, res) => {
-  // console.log(req.params.drinkId);
+  console.log(req.params.drinkId);
   const allReviews = await prisma.reviews.findMany({
     where: { drink_id: req.params.drinkId },
   });
@@ -63,9 +94,10 @@ const postReview = async (req, res) => {
     res.json("review created");
     res.status(201);
   } catch (error) {
+    console.log(error);
     res.json("error creating review");
     res.status(500);
   }
 };
 
-module.exports = { createUser, users, drinkReviews, postReview };
+module.exports = { createUser, users, drinkReviews, postReview, login };

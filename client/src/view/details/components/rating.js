@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Bars from "./bars";
+const { postReview } = require("../../../services/api");
 
 const Rating = ({ drinkId, userId }) => {
   const [rating, setRating] = useState({
@@ -12,14 +13,8 @@ const Rating = ({ drinkId, userId }) => {
   const [popUp, setPopUp] = useState(false);
   const handleSubmit = (data) => {
     data.preventDefault();
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...rating, userId: userId, drinkId: drinkId }),
-    };
-    fetch("http://localhost:3010/review", options);
+    data.target.reset();
+    postReview({ ...rating, userId: userId, drinkId: drinkId });
   };
   return (
     <div>

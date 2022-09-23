@@ -5,17 +5,15 @@ import { useEffect, useState } from "react";
 const Bars = ({ data, hook, rating }) => {
   const [bars, setBar] = useState([]);
   const [barList, setList] = useState([]);
+  const { getBars } = require("../../../services/api");
 
   useEffect(() => {
     // data from api
-    fetch(
-      `https://api.tomtom.com/search/2/nearbySearch/.json?lat=41.390&lon=2.154&limit=100&radius=6000&categorySet=9379004&view=Unified&relatedPois=off&key=QbzgAUTUhhn7YdPuVX2l4nFur8n0kPbv`
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setBar(response.results);
-      })
-      .catch((err) => console.error(err));
+    const getter = async () => {
+      const { results } = await getBars();
+      setBar(results);
+    };
+    getter();
   }, []);
 
   useEffect(() => {

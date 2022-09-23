@@ -1,29 +1,27 @@
 import { useEffect, useState } from "react";
 import ItemImg from "../../List/items/drink-item-img";
-// const { env } = require("../../../env");
+const { getPopular } = require("../../services/api");
+
 function Home() {
   const [popular, setPopular] = useState([]);
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "",
-      "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
-    },
-  };
   useEffect(() => {
-    fetch("https://the-cocktail-db.p.rapidapi.com/popular.php", options)
-      .then((response) => response.json())
-      .then((response) => setPopular(response.drinks))
-      .catch((err) => console.error(err));
+    //dislays popular drinks
+    const getter = async () => {
+      const { drinks } = await getPopular();
+      setPopular(drinks);
+    };
+    getter();
   }, []);
   return (
     <div className="Home">
       <div>
         <h2>Popular this Week</h2>
         <div className="drink-container-img">
-          {popular.map((item) => (
-            <ItemImg data={item} key={item.idDrink} />
-          ))}
+          {popular ? (
+            popular.map((item) => <ItemImg data={item} key={item.idDrink} />)
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

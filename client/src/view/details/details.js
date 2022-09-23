@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReviewItem from "../../List/items/review-item";
 import Rating from "./components/rating";
-const getReview = require("./utils");
+const { getReview } = require("../../services/api");
 const Details = () => {
   // const { id } = useParams();
   const [drink, setDrink] = useState([]);
@@ -47,7 +47,7 @@ const Details = () => {
     <div className="details-container">
       <div className="details-header">
         <h1>{drink.strDrink}</h1>
-        <Rating drinkId={drink.idDrink} userId={1} />
+        <Rating drinkId={drink.idDrink} userId={3} />
       </div>
       <div className="details-body">
         <img src={drink.strDrinkThumb} className="details-img"></img>
