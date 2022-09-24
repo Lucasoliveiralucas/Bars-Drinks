@@ -76,6 +76,11 @@ const drinkReviews = async (req, res) => {
   res.json(allReviews);
   console.log(allReviews);
 };
+const allDrinkReviews = async (req, res) => {
+  const allReviews = await prisma.reviews.findMany({});
+  res.json(allReviews);
+  console.log(allReviews);
+};
 
 const postReview = async (req, res) => {
   try {
@@ -100,4 +105,25 @@ const postReview = async (req, res) => {
   }
 };
 
-module.exports = { createUser, users, drinkReviews, postReview, login };
+const userData = async (req, res) => {
+  try {
+    const { id } = jwt.verify(token, SECRET_KEY);
+    const user = await prisma.user.findFirst({
+      where: { id },
+    });
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+    res.json("error getting user");
+  }
+};
+
+module.exports = {
+  createUser,
+  users,
+  drinkReviews,
+  postReview,
+  login,
+  allDrinkReviews,
+  userData,
+};

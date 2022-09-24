@@ -1,6 +1,8 @@
 const my_api = "http://localhost:3011/";
 const RAPID_API_KEY = process.env.REACT_APP_RAPID_APIKEY;
 const OTHER_API_KEY = process.env.REACT_APP_OTHER_KEY;
+const { barReviewSorter } = require("./utils");
+
 const getPopular = () => {
   const options = {
     method: "GET",
@@ -30,6 +32,7 @@ const getSearch = (drink) => {
     .then((response) => response.json())
     .catch((err) => console.error(err));
 };
+
 const getBars = () => {
   return fetch(
     `https://api.tomtom.com/search/2/nearbySearch/.json?lat=41.390&lon=2.154&limit=100&radius=6000&categorySet=9379004&view=Unified&relatedPois=off&key=${OTHER_API_KEY}`
@@ -55,38 +58,15 @@ const postReview = (rating) => {
 const getReview = async (drinkId) => {
   const data = await fetch(`${my_api}review/${drinkId}`);
   const res = await data.json();
-  let obj = {};
-  let array = [];
-  //creates object with bars as keys and having a rating array
-  res.forEach((el) => {
-    obj[el.bar]
-      ? (obj[el.bar] = [...obj[el.bar], el.rating_])
-      : (obj[el.bar] = [el.rating_]);
-  });
-  //formating object for easier operations
-  for (const key in obj) {
-    if (Object.hasOwnProperty.call(obj, key)) {
-      array = [...array, { bar: key, rating: obj[key] }];
-    }
-  }
-  array.map((el, i) => {
-    return (array[i].rating =
-      Math.round(el.rating.reduce((p, c) => p + c) / (2 * el.rating.length)) /
-      10);
-  });
-  function compare(a, b) {
-    if (a.rating > b.rating) {
-      return -1;
-    }
-    if (a.rating < b.rating) {
-      return 1;
-    }
-    return 0;
-  }
-  array.sort(compare);
-  return array;
+  return barReviewSorter(res);
 };
-const getAllReviews = () => {};
+
+const getAllReviews = async () => {
+  const data = await fetch(`${my_api}allreviews/`);
+  const res = await data.json();
+  return barReviewSorter(res);
+};
+
 const login = (user) => {
   return fetch(`${my_api}login`, {
     method: "POST",
@@ -98,6 +78,7 @@ const login = (user) => {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 };
+
 const register = (user) => {
   return fetch(`${my_api}register`, {
     method: "POST",
@@ -110,6 +91,20 @@ const register = (user) => {
     .catch((err) => console.log(err));
 };
 
+const userData = async () => {
+  const accessToken = localStorage.getItem("accessToken");
+  const options = {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  const data = await fetch(`${my_api}home/profile`, options);
+  const res = await data.json();
+  return res;
+};
 const getCategories = () => {
   const options = {
     method: "GET",
@@ -148,4 +143,6 @@ module.exports = {
   register,
   getCategories,
   getMultipleRandom,
+  getAllReviews,
+  userData,
 };

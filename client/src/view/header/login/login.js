@@ -9,7 +9,6 @@ const Login = ({ props }) => {
     password: null,
   });
   const handleSubmit = async (data) => {
-    console.log(props);
     data.preventDefault();
     data.target.reset();
     const res = await login(loginInfo);

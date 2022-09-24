@@ -18,6 +18,9 @@
   align-items: flex-end;
   margin-bottom: 3rem;
 }
+.home-logged-out-list div {
+  display: flex;
+}
 .home-logged-out-list {
   margin-left: 3rem;
 }
