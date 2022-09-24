@@ -16,7 +16,6 @@ function App() {
     const isUserLogged = localStorage.getItem("accessToken");
     const getter = async () => {
       if (isUserLogged && !user.name) {
-        console.log("not supped");
         const updatedUser = await refreshUser(isUserLogged);
         dispatch(loggedin({ user: { ...updatedUser }, logged: true }));
       }

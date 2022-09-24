@@ -112,11 +112,9 @@ const userData = async (req, res) => {
       where: { email: data.email },
     });
     const reviews = await prisma.reviews.findMany({
-      where: { userId: 12 },
+      where: { userId: user.id },
     });
-    // const reviews = await prisma.reviews.findMany({});
-
-    console.log(reviews);
+    res.json(reviews);
   } catch (error) {
     console.log(error);
     res.json("error getting user");

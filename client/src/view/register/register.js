@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 const { register } = require("../../services/api");
 const { loggedin } = require("../../redux/actions");
-const Register = (props) => {
+const Register = () => {
   const userDataStatus = useSelector((state) => state.userDataStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
