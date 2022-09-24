@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+const { loggedin, loggedout } = require("../../../redux/actions");
 const { login } = require("../../../services/api");
-const Login = ({ props }) => {
+
+const Login = () => {
+  const { logged } = useSelector((state) => state.userDataStatus);
+  const dispatch = useDispatch();
   const [displayContainer, setDisplay] = useState("login-container-not");
   const [loginInfo, setLogin] = useState({
     email: null,
@@ -12,14 +16,15 @@ const Login = ({ props }) => {
     data.preventDefault();
     data.target.reset();
     const res = await login(loginInfo);
+    console.log(res);
     if (res.error) {
       alert(`${res.message}`);
     } else {
       const { accessToken } = res;
+      const { user } = res;
       localStorage.setItem("accessToken", accessToken);
       toggleLoginContainer();
-      props.setLogged(true);
-      //   auth.login(() => navigate("/profile"));
+      dispatch(loggedin({ user: { ...user }, logged: true }));
     }
   };
   const toggleLoginContainer = () => {
@@ -29,11 +34,11 @@ const Login = ({ props }) => {
   };
   const logout = () => {
     localStorage.removeItem("accessToken");
-    props.setLogged(false);
+    dispatch(loggedout());
   };
   return (
     <>
-      {props.logged ? (
+      {logged ? (
         <button onClick={(e) => logout()}>logout</button>
       ) : (
         <div>
@@ -62,7 +67,6 @@ const Login = ({ props }) => {
                 <Link
                   className="drink-img"
                   to={`/register`}
-                  //   state={data}
                   onClick={(e) => toggleLoginContainer()}
                 >
                   Register

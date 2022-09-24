@@ -90,9 +90,7 @@ const register = (user) => {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 };
-
-const userData = async () => {
-  const accessToken = localStorage.getItem("accessToken");
+const refreshUser = async (accessToken) => {
   const options = {
     method: "GET",
     credentials: "include",
@@ -100,6 +98,23 @@ const userData = async () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
+  };
+  const data = await fetch(`${my_api}refresh`, options);
+  const user = await data.json();
+  return user;
+};
+const userData = async (e) => {
+  const email = e;
+  const accessToken = localStorage.getItem("accessToken");
+  if (!email) return;
+  const options = {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ email }),
   };
   const data = await fetch(`${my_api}home/profile`, options);
   const res = await data.json();
@@ -145,4 +160,5 @@ module.exports = {
   getMultipleRandom,
   getAllReviews,
   userData,
+  refreshUser,
 };

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Bars from "./bars";
 const { postReview } = require("../../../services/api");
 
-const Rating = ({ drinkId, userId }) => {
+const Rating = ({ drinkId }) => {
+  const { user } = useSelector((state) => state.userDataStatus);
   const [rating, setRating] = useState({
     userId: null,
     drinkId: null,
@@ -14,7 +16,7 @@ const Rating = ({ drinkId, userId }) => {
   const handleSubmit = (data) => {
     data.preventDefault();
     data.target.reset();
-    postReview({ ...rating, userId: userId, drinkId: drinkId });
+    postReview({ ...rating, userId: user.id, drinkId: drinkId });
   };
   return (
     <div>

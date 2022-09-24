@@ -4,13 +4,13 @@ import ItemText from "../../../List/items/drink-item-text";
 const { getSearch } = require("../../../services/api");
 
 const SearchBar = () => {
-  const [search, setDrink] = useState("");
+  const [search, setSearch] = useState("");
   const [display, setDisplay] = useState([]);
   const timeout = useRef();
 
   useEffect(() => {
     clearTimeout(timeout.current);
-    function getMovie(drink) {
+    function getDrink(drink) {
       timeout.current = setTimeout(() => {
         const getter = async () => {
           const data = await getSearch(drink);
@@ -19,7 +19,7 @@ const SearchBar = () => {
         getter();
       }, 100);
     }
-    getMovie(search);
+    getDrink(search);
   }, [search]);
   return (
     <>
@@ -27,7 +27,7 @@ const SearchBar = () => {
         <input
           type="text"
           placeholder="Search..."
-          onChange={(e) => setDrink(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         ></input>
       </form>
       <div className="drink-container-text">

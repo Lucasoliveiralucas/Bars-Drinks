@@ -60,7 +60,9 @@ const login = async (req, res) => {
     const validatedPass = await bcrypt.compare(password, currentUser.password);
     if (!validatedPass) throw new Error();
     const accessToken = jwt.sign({ id: currentUser.id }, SECRET_KEY);
-    res.status(200).send({ accessToken });
+    res
+      .status(200)
+      .send({ accessToken, user: { ...currentUser, password: null } });
   } catch (error) {
     console.log(error);
     res
@@ -69,7 +71,6 @@ const login = async (req, res) => {
   }
 };
 const drinkReviews = async (req, res) => {
-  console.log(req.params.drinkId);
   const allReviews = await prisma.reviews.findMany({
     where: { drink_id: req.params.drinkId },
   });
@@ -79,7 +80,6 @@ const drinkReviews = async (req, res) => {
 const allDrinkReviews = async (req, res) => {
   const allReviews = await prisma.reviews.findMany({});
   res.json(allReviews);
-  console.log(allReviews);
 };
 
 const postReview = async (req, res) => {
@@ -107,14 +107,38 @@ const postReview = async (req, res) => {
 
 const userData = async (req, res) => {
   try {
-    const { id } = jwt.verify(token, SECRET_KEY);
+    const data = req.body;
     const user = await prisma.user.findFirst({
-      where: { id },
+      where: { email: data.email },
     });
-    console.log(user);
+    const reviews = await prisma.reviews.findMany({
+      where: { userId: 12 },
+    });
+    // const reviews = await prisma.reviews.findMany({});
+
+    console.log(reviews);
   } catch (error) {
     console.log(error);
     res.json("error getting user");
+  }
+};
+const refresh = async (req, res) => {
+  try {
+    const authHeaders = req.headers["authorization"];
+    if (!authHeaders) return res.sendStatus(403);
+    const token = authHeaders.split(" ")[1];
+
+    // verify & decode token payload,
+    const { id } = jwt.verify(token, SECRET_KEY);
+    // attempt to find user object and set to req
+    const currentUser = await prisma.user.findFirst({
+      where: { id },
+    });
+    if (!currentUser) return res.sendStatus(401);
+    const user = { ...currentUser, password: null };
+    res.json(user);
+  } catch (error) {
+    res.sendStatus(401);
   }
 };
 
@@ -126,4 +150,5 @@ module.exports = {
   login,
   allDrinkReviews,
   userData,
+  refresh,
 };

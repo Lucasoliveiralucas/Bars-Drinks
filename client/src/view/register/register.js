@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 const { register } = require("../../services/api");
+const { loggedin } = require("../../redux/actions");
 const Register = (props) => {
+  const userDataStatus = useSelector((state) => state.userDataStatus);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [registerData, setRegister] = useState({
+    id: null,
     name: null,
     email: null,
     password: null,
@@ -11,6 +16,7 @@ const Register = (props) => {
     age: 18,
     gender: "something",
   });
+
   const [passwordCheck, setCheck] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +30,7 @@ const Register = (props) => {
     else {
       const { accessToken } = res;
       localStorage.setItem("accessToken", accessToken);
-      props.setLogged(true);
+      dispatch(loggedin({ user: registerData, logged: true }));
       navigate("/");
     }
     e.target.value.reset();

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import ItemImg from "../../List/items/drink-item-img";
 import LoggedIn from "./logged/loggedin";
 import LoggetOut from "./logged/loggetout";
 const { getPopular, getCategories } = require("../../services/api");
 
-function Home(props) {
+function Home() {
   const [popular, setPopular] = useState([]);
   const [categories, setCategories] = useState([]);
+  const { user, logged } = useSelector((state) => state.userDataStatus);
 
   useEffect(() => {
     const getter = async () => {
@@ -29,7 +31,7 @@ function Home(props) {
         <h2>Surprise me!</h2>
       </div>
       <div>
-        {props.logged ? <LoggedIn /> : <LoggetOut />}
+        {logged ? <LoggedIn /> : <LoggetOut />}
         <h2>Popular this Week</h2>
         <div className="drink-container-img">
           {popular ? (

@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 const { userData } = require("../../../services/api");
 
 const LoggedIn = () => {
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    const getter = async () => {
-      const data = await userData();
-      setUser(data);
-    };
-    getter();
-  }, []);
-  return <div></div>;
+  const { user } = useSelector((state) => state.userDataStatus);
+  userData(user.email);
+  return <div>hello {user.name}</div>;
 };
 
 export default LoggedIn;

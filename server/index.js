@@ -7,7 +7,7 @@ const cors = require("cors");
 const router = require("./router");
 
 const corsOptions = {
-  origin: "http://localhost:3002",
+  origin: "http://localhost:3000",
   credentials: true,
   optionsSucessStatus: 200,
 };
