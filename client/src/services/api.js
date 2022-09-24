@@ -57,7 +57,6 @@ const getReview = async (drinkId) => {
   const res = await data.json();
   let obj = {};
   let array = [];
-  //
   //creates object with bars as keys and having a rating array
   res.forEach((el) => {
     obj[el.bar]
@@ -87,6 +86,7 @@ const getReview = async (drinkId) => {
   array.sort(compare);
   return array;
 };
+const getAllReviews = () => {};
 const login = (user) => {
   return fetch(`${my_api}login`, {
     method: "POST",

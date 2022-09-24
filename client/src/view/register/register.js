@@ -9,7 +9,7 @@ const Register = (props) => {
     password: null,
     fav_components: null,
     age: 18,
-    gender: null,
+    gender: "something",
   });
   const [passwordCheck, setCheck] = useState("");
   const handleSubmit = async (e) => {
@@ -70,12 +70,12 @@ const Register = (props) => {
         <input
           type="text"
           name="bar"
-          placeholder="Bar..."
+          placeholder="Vodka, Cinnamon..."
           onChange={(e) =>
             setRegister({ ...registerData, fav_components: e.target.value })
           }
         ></input>
-        <h4>Age *</h4>
+        {/* <h4>Age *</h4>
         <input type="date" name="bar" placeholder="Bar..."></input>
         <h4>Gender *</h4>
         <input
@@ -85,7 +85,7 @@ const Register = (props) => {
           onChange={(e) =>
             setRegister({ ...registerData, gender: e.target.value })
           }
-        ></input>
+        ></input> */}
         <button type="submit">Register</button>
       </form>
     </div>
