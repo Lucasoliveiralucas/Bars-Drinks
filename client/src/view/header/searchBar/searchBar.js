@@ -9,6 +9,7 @@ const SearchBar = () => {
   const timeout = useRef();
 
   useEffect(() => {
+    //searching drinks API
     clearTimeout(timeout.current);
     function getDrink(drink) {
       timeout.current = setTimeout(() => {
