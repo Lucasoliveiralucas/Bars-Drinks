@@ -47,7 +47,7 @@ const Details = () => {
     <div className="details-container">
       <div className="details-header">
         <h1>{drink.strDrink}</h1>
-        <Rating drinkId={drink.idDrink} />
+        <Rating drinkId={drink.idDrink} setReviews={setReviews} />
       </div>
       <div className="details-body">
         <img src={drink.strDrinkThumb} className="details-img"></img>

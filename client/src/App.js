@@ -6,7 +6,7 @@ import Header from "./view/header/header";
 import Register from "./view/register/register";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loggedout, loggedin } from "./redux/actions";
+import { loggedin } from "./redux/actions";
 import { refreshUser } from "./services/api";
 
 function App() {

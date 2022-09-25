@@ -1,0 +1,28 @@
+.stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.star {
+  z-index: 5;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+.star svg {
+  fill: none;
+  width: 100%;
+  height: 100%;
+  stroke: none;
+  fill: gray;
+}
+
+.selected svg,
+.selected ~ .star svg {
+  fill: rgb(255, 157, 0);
+}
+.star:hover svg,
+.star:hover ~ .star svg {
+  fill: gold;
+}

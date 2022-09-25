@@ -1,36 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Bars from "./bars";
-const { postReview } = require("../../../services/api");
+import Stars from "./stars/stars";
+const { postReview, getReview } = require("../../../services/api");
 
-const Rating = ({ drinkId }) => {
+const Rating = ({ drinkId, setReviews }) => {
   const { user } = useSelector((state) => state.userDataStatus);
+  const [testBar, setTestBar] = useState(""); //should be a bar closest to written string
+  const [popUp, setPopUp] = useState(false);
   const [rating, setRating] = useState({
     userId: null,
     drinkId: null,
     bar: null,
     score: null,
   });
-  const [testBar, setTestBar] = useState(""); //should be a bar closest to written string
-  const [popUp, setPopUp] = useState(false);
+
   const handleSubmit = (data) => {
     data.preventDefault();
     data.target.reset();
     postReview({ ...rating, userId: user.id, drinkId: drinkId });
+    // const res = await getReview(drinkId);
+    // setReviews(res);
   };
+  useEffect(() => {
+    const isUserLogged = localStorage.getItem("accessToken");
+    if (!isUserLogged && popUp) {
+      setPopUp(false);
+      alert("Please login to rate");
+    }
+  }, [rating.score]);
   return (
     <div>
       <h1>Rate</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="range"
-          min={0}
-          max={100}
-          name="score"
-          placeholder="Score"
-          onChange={(e) => setRating({ ...rating, score: e.target.value })}
-          onClick={(e) => setPopUp(true)}
-        ></input>
+        <div className="star-container">
+          <Stars hook={setRating} state={rating} setPopUp={setPopUp} />
+        </div>
         <div className={`rating-popup-${popUp}`}>
           <button id="close-rating" onClick={(e) => setPopUp(false)}>
             X

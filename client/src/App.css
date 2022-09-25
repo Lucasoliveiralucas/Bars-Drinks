@@ -126,6 +126,18 @@ h2 {
   width: 80%;
   border-radius: 0px;
 }
+.star-container {
+  position: relative;
+}
+.star-container input {
+  width: 12rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* display: none; */
+}
+
 #comment-input {
   height: 5rem;
 }
