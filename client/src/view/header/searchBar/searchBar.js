@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useEffect, useState } from "react";
-import ItemText from "../../../List/items/drink-item-text";
+import { Link } from "react-router-dom";
 const { getSearch } = require("../../../services/api");
 
 const SearchBar = () => {
@@ -28,12 +28,26 @@ const SearchBar = () => {
           type="text"
           placeholder="Search..."
           onChange={(e) => setSearch(e.target.value)}
+          value={search}
         ></input>
       </form>
       <div className="drink-container-text">
         {display.drinks ? (
           display.drinks.map((item) => (
-            <ItemText data={item} key={item.idDrink} />
+            <Link
+              className="drink-text"
+              to={`/details/${item.idDrink}`}
+              state={item}
+            >
+              <h4
+                onClick={(e) => {
+                  setDisplay([]);
+                  setSearch("");
+                }}
+              >
+                {item.strDrink}
+              </h4>
+            </Link>
           ))
         ) : (
           <></>

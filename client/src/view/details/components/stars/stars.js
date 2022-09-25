@@ -6,7 +6,6 @@ const Stars = ({ hook, state, setPopUp }) => {
   let currentRatingIndex = 0;
 
   const setRating = (index) => {
-    console.log(index);
     stars.forEach((star) => star.classList.remove("selected"));
     if (index > 0 && index <= stars.length) {
       document

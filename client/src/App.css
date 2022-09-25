@@ -59,12 +59,20 @@ input {
   z-index: 3;
   position: absolute;
   background-color: rgba(201, 201, 201, 0.92);
-  width: 20rem;
-  border-radius: 5px;
+  width: 19rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .drink-text h4 {
   margin-left: 1rem;
   color: #2f3e46;
+  cursor: pointer;
+}
+#comment-input {
+  text-align: justify;
+}
+input:focus {
+  outline: none !important;
 }
 img {
   height: 15rem;
