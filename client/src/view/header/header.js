@@ -4,6 +4,7 @@ import SearchBar from "./searchBar/searchBar";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../services/api";
 import { useEffect, useState } from "react";
+import Register from "../register/register";
 
 const Header = (props) => {
   const [categories, setCategories] = useState([]);
@@ -35,7 +36,11 @@ const Header = (props) => {
       <div>
         <SearchBar />
       </div>
-      <Login props={props} />
+      <div style={{ display: "flex" }}>
+        <Login props={props} />
+        <h4>/</h4>
+        <Register />
+      </div>
     </div>
   );
 };

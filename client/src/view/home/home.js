@@ -34,6 +34,22 @@ function Home() {
   }, []);
   return (
     <div className="home">
+      <div
+        style={{
+          display: "flex",
+          backgroundColor: "#dec2b9",
+          marginTop: "3rem",
+        }}
+      >
+        <h2 style={{ marginLeft: "3%" }}>Welcome to Barks&Drinks</h2>
+        <div style={{ textAlign: "center", marginLeft: "60%" }}>
+          <h3>
+            Explore the best bars in your region and get to know(and rate) your
+            new favourite drink.
+          </h3>
+          <h3>Cheers!</h3>
+        </div>
+      </div>
       <div>
         {logged ? <LoggedIn /> : <LoggetOut barReviews={barReviews} />}
         <div className="drink-container-img">
@@ -50,7 +66,7 @@ function Home() {
                       state={data}
                     >
                       {data.strDrink}
-                    </Link>{" "}
+                    </Link>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

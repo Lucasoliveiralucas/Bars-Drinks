@@ -1,10 +1,14 @@
 .register-container {
-  background-color: rgba(255, 255, 255, 0.097);
+  z-index: 3;
+  left: 40%;
+  top: 20%;
+  position: absolute;
+  background-color: #dec2b9;
   border-radius: 5px;
   width: 18rem;
   height: 27rem;
   padding-left: 2rem;
-  box-shadow: 2px 3px rgba(0, 0, 0, 0.258);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.258);
 }
 .register-container input {
   width: 15rem;

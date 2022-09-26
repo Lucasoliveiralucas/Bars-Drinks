@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 const { loggedin, loggedout } = require("../../../redux/actions");
 const { login } = require("../../../services/api");
@@ -64,13 +63,14 @@ const Login = () => {
                 }
               ></input>
               <div>
-                <Link
+                {/* <Link
                   className="drink-img"
                   to={`/register`}
                   onClick={(e) => toggleLoginContainer()}
                 >
                   Register
-                </Link>
+                </Link> */}
+
                 <button type="submit">Sign in</button>
               </div>
             </form>

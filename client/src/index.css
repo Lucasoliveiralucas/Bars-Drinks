@@ -5,10 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #2f3e46;
-  color: #cad2c5;
+  background-color: #f4f3ee;
+  color: #8a817c;
+}
+a {
+  color: #8a817c;
+  text-decoration: none;
+}
+input:focus {
+  outline: none !important;
+}
+img {
+  height: 15rem;
+  border-radius: 5px;
 }
 
+h2 {
+  margin-left: 0.5rem;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

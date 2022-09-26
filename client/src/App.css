@@ -21,21 +21,6 @@ input {
 #comment-input {
   text-align: justify;
 }
-input:focus {
-  outline: none !important;
-}
-img {
-  height: 15rem;
-  border-radius: 5px;
-}
-
-a {
-  color: #cad2c5;
-  text-decoration: none;
-}
-h2 {
-  margin-left: 0.5rem;
-}
 .details-container {
   margin: 2rem;
 }

@@ -17,7 +17,7 @@ const Register = () => {
     age: 18,
     gender: "something",
   });
-
+  const [displayRegister, setDisplayRegister] = useState(false);
   const [passwordCheck, setCheck] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,52 +37,63 @@ const Register = () => {
     e.target.value.reset();
   };
   return (
-    <div className="register-container">
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <h4 id="register-name-text">Name *</h4>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name..."
-          onChange={(e) =>
-            setRegister({ ...registerData, name: e.target.value })
-          }
-        ></input>
-        <h4>Email *</h4>
-        <input
-          type="text"
-          name="email"
-          placeholder="Email..."
-          onChange={(e) =>
-            setRegister({ ...registerData, email: e.target.value })
-          }
-        ></input>
-        <h4>Password *</h4>
-        <input
-          type="password"
-          name="password"
-          placeholder="Pawssword..."
-          onChange={(e) =>
-            setRegister({ ...registerData, password: e.target.value })
-          }
-        ></input>
-        <h4>Confirm Password *</h4>
-        <input
-          type="password"
-          name="rpassword"
-          placeholder="Password..."
-          onChange={(e) => setCheck(e.target.value)}
-        ></input>
-        <h4>Favourite Drink Ingredients </h4>
-        <input
-          type="text"
-          name="bar"
-          placeholder="Vodka, Cinnamon..."
-          onChange={(e) =>
-            setRegister({ ...registerData, fav_components: e.target.value })
-          }
-        ></input>
-        {/* <h4>Age *</h4>
+    <>
+      <button onClick={(e) => setDisplayRegister(!displayRegister)}>
+        Register
+      </button>
+      {displayRegister ? (
+        <div className="register-container">
+          <button
+            style={{ float: "right" }}
+            onClick={(e) => setDisplayRegister(!displayRegister)}
+          >
+            X
+          </button>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <h4 id="register-name-text">Name *</h4>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name..."
+              onChange={(e) =>
+                setRegister({ ...registerData, name: e.target.value })
+              }
+            ></input>
+            <h4>Email *</h4>
+            <input
+              type="text"
+              name="email"
+              placeholder="Email..."
+              onChange={(e) =>
+                setRegister({ ...registerData, email: e.target.value })
+              }
+            ></input>
+            <h4>Password *</h4>
+            <input
+              type="password"
+              name="password"
+              placeholder="Pawssword..."
+              onChange={(e) =>
+                setRegister({ ...registerData, password: e.target.value })
+              }
+            ></input>
+            <h4>Confirm Password *</h4>
+            <input
+              type="password"
+              name="rpassword"
+              placeholder="Password..."
+              onChange={(e) => setCheck(e.target.value)}
+            ></input>
+            <h4>Favourite Drink Ingredients </h4>
+            <input
+              type="text"
+              name="bar"
+              placeholder="Vodka, Cinnamon..."
+              onChange={(e) =>
+                setRegister({ ...registerData, fav_components: e.target.value })
+              }
+            ></input>
+            {/* <h4>Age *</h4>
         <input type="date" name="bar" placeholder="Bar..."></input>
         <h4>Gender *</h4>
         <input
@@ -93,9 +104,13 @@ const Register = () => {
             setRegister({ ...registerData, gender: e.target.value })
           }
         ></input> */}
-        <button type="submit">Register</button>
-      </form>
-    </div>
+            <button type="submit">Register</button>
+          </form>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

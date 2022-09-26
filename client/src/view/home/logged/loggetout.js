@@ -15,11 +15,6 @@ const LoggetOut = ({ barReviews }) => {
   }, []);
   return (
     <div className="home-logged-out">
-      <div>
-        <h2>Register</h2>
-        <Register />
-      </div>
-
       <div className="home-logged-out-list">
         <h2>Top Rated Bars</h2>
         <div>
