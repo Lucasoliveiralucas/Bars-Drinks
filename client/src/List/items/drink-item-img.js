@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 const ItemImg = ({ data }) => {
+  console.log(data);
   return (
-    <Link className="drink-img" to={`/details/${data.idDrink}`} state={data}>
-      <h1 className="drink-img-text">{data.strDrink}</h1>
-      <img id="img" src={data.strDrinkThumb}></img>
-    </Link>
+    <div className="drink-img">
+      <img src={data.strDrinkThumb}></img>
+      <div>
+        <Link
+          className="drink-img-text"
+          to={`/details/${data.idDrink}`}
+          state={data}
+        >
+          {data.strDrink}
+        </Link>
+        <p>{data.strInstructions}</p>
+      </div>
+    </div>
   );
 };
 export default ItemImg;

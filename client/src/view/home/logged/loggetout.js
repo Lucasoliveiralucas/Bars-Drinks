@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import ItemImg from "../../../List/items/drink-item-img";
+import { Link } from "react-router-dom";
 import ReviewItem from "../../../List/items/review-item";
 import Register from "../../register/register";
 const { getMultipleRandom, getAllReviews } = require("../../../services/api");
-const LoggetOut = () => {
+const LoggetOut = ({ barReviews }) => {
   const [random, setRandom] = useState([]);
-  const [barReviews, setBarReviews] = useState([]);
 
   useEffect(() => {
     const getter = async () => {
       const random = await getMultipleRandom();
       setRandom(random.drinks);
-      const allReviews = await getAllReviews();
-      setBarReviews(allReviews);
     };
     getter();
   }, []);
@@ -33,9 +30,22 @@ const LoggetOut = () => {
           )}
         </div>
         <h2>Our Selection</h2>
-        <div className="drink-container-img">
+        <div className="random-drink-container-img">
           {random ? (
-            random.map((item) => <ItemImg data={item} key={item.idDrink} />)
+            random.map((data) => (
+              <div className="random-drink-img">
+                <img src={data.strDrinkThumb}></img>
+                <div>
+                  <Link
+                    className="random-drink-img-text"
+                    to={`/details/${data.idDrink}`}
+                    state={data}
+                  >
+                    {data.strDrink}
+                  </Link>
+                </div>
+              </div>
+            ))
           ) : (
             <></>
           )}

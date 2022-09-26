@@ -1,3 +1,4 @@
+import "./header.css";
 import Login from "./login/login";
 import SearchBar from "./searchBar/searchBar";
 import { Link } from "react-router-dom";

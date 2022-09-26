@@ -30,5 +30,23 @@ const barReviewSorter = (reviews) => {
   array.sort(compare);
   return array;
 };
-
-module.exports = { barReviewSorter };
+const drinkReviewSorter = (reviews, drinkId) => {
+  let obj = {};
+  let retObj = {};
+  //creates object with bars as keys and having a rating array
+  reviews.forEach((el) => {
+    obj[el.drink_id]
+      ? (obj[el.drink_id] = [...obj[el.drink_id], el.rating_])
+      : (obj[el.drink_id] = [el.rating_]);
+  });
+  //calculates average rate for each drink
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      retObj[key] =
+        Math.round(obj[key].reduce((p, c) => p + c) / (2 * obj[key].length)) /
+        10;
+    }
+  }
+  return retObj;
+};
+module.exports = { barReviewSorter, drinkReviewSorter };

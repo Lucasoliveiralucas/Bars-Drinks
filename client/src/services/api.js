@@ -1,7 +1,7 @@
 const my_api = "http://localhost:3011/";
 const RAPID_API_KEY = process.env.REACT_APP_RAPID_APIKEY;
 const OTHER_API_KEY = process.env.REACT_APP_OTHER_KEY;
-const { barReviewSorter } = require("./utils");
+const { barReviewSorter, drinkReviewSorter } = require("./utils");
 
 const getPopular = () => {
   const options = {
@@ -61,10 +61,12 @@ const getReview = async (drinkId) => {
   return barReviewSorter(res);
 };
 
-const getAllReviews = async () => {
+const getAllReviews = async (drinkData) => {
   const data = await fetch(`${my_api}allreviews/`);
   const res = await data.json();
-  return barReviewSorter(res);
+  const barReviews = barReviewSorter(res);
+  const drinkReviews = drinkReviewSorter(res, drinkData);
+  return { bars: barReviews.slice(0, 5), drinks: drinkReviews };
 };
 
 const login = (user) => {

@@ -1,0 +1,24 @@
+.register-container {
+  background-color: rgba(255, 255, 255, 0.097);
+  border-radius: 5px;
+  width: 18rem;
+  height: 27rem;
+  padding-left: 2rem;
+  box-shadow: 2px 3px rgba(0, 0, 0, 0.258);
+}
+.register-container input {
+  width: 15rem;
+  border-radius: 5px;
+  margin-bottom: 0rem;
+}
+.register-container button {
+  border-radius: 10px;
+  margin-top: 0.7rem;
+  margin-right: 1rem;
+}
+.register-container h4 {
+  margin-top: 0.5rem;
+}
+#register-name-text {
+  padding-top: 1rem;
+}

@@ -1,3 +1,4 @@
+import "./register.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,7 +66,7 @@ const Register = () => {
             setRegister({ ...registerData, password: e.target.value })
           }
         ></input>
-        <h4>Repeat Password *</h4>
+        <h4>Confirm Password *</h4>
         <input
           type="password"
           name="rpassword"
