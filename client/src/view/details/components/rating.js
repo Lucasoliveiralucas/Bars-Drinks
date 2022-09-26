@@ -8,7 +8,6 @@ const Rating = ({ drinkId, setReviews }) => {
   const [bars, setBar] = useState([]);
   const [barList, setBarList] = useState([]);
   const [writtenBar, setwrittenBar] = useState(""); //should be a bar closest to written string
-  const { getBars } = require("../../../services/api");
   const [popUp, setPopUp] = useState(false);
   const [rating, setRating] = useState({
     userId: null,

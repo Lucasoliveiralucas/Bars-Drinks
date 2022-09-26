@@ -34,21 +34,8 @@ const createUser = async (req, res) => {
     const accessToken = jwt.sign({ id }, SECRET_KEY);
     res.status(201).send({ accessToken });
   } catch (error) {
-    res.json({ message: "error" });
+    res.json({ message: "Error creating user" });
     console.log(error);
-  }
-};
-//test function to check for users in database
-const users = async (req, res) => {
-  try {
-    // const allUsers = await prisma.user.findFirst({
-    //   where: { name: "Testuser" },
-    // });
-    const allUsers = await prisma.user.findMany({});
-    res.json(allUsers);
-    console.log(allUsers);
-  } catch (error) {
-    res.json("error getting users");
   }
 };
 const login = async (req, res) => {
@@ -71,15 +58,21 @@ const login = async (req, res) => {
   }
 };
 const drinkReviews = async (req, res) => {
-  const allReviews = await prisma.reviews.findMany({
-    where: { drink_id: req.params.drinkId },
-  });
-  res.json(allReviews);
-  console.log(allReviews);
+  try {
+    const allReviews = await prisma.reviews.findMany({
+      where: { drink_id: req.params.drinkId },
+    });
+    res.json(allReviews);
+  } catch (error) {
+    console.log(error);
+  }
 };
 const allDrinkReviews = async (req, res) => {
-  const allReviews = await prisma.reviews.findMany({});
-  res.json(allReviews);
+  try {
+    const allReviews = await prisma.reviews.findMany({});
+    res.status(200);
+    res.json(allReviews);
+  } catch (error) {}
 };
 
 const postReview = async (req, res) => {
@@ -96,8 +89,8 @@ const postReview = async (req, res) => {
         },
       },
     });
-    res.json("review created");
     res.status(201);
+    res.json("review created");
   } catch (error) {
     console.log(error);
     res.json("error creating review");
@@ -107,14 +100,10 @@ const postReview = async (req, res) => {
 
 const userData = async (req, res) => {
   try {
-    const data = req.body;
-    const user = await prisma.user.findFirst({
-      where: { email: data.email },
-    });
     const reviews = await prisma.reviews.findMany({
-      where: { userId: user.id },
+      where: { userId: req.user.id },
     });
-    res.json(reviews);
+    res.json(reviews).status(201);
   } catch (error) {
     console.log(error);
     res.json("error getting user");
@@ -122,15 +111,8 @@ const userData = async (req, res) => {
 };
 const refresh = async (req, res) => {
   try {
-    const authHeaders = req.headers["authorization"];
-    if (!authHeaders) return res.sendStatus(403);
-    const token = authHeaders.split(" ")[1];
-
-    // verify & decode token payload,
-    const { id } = jwt.verify(token, SECRET_KEY);
-    // attempt to find user object and set to req
     const currentUser = await prisma.user.findFirst({
-      where: { id },
+      where: { id: req.user.id },
     });
     if (!currentUser) return res.sendStatus(401);
     const user = { ...currentUser, password: null };
@@ -142,7 +124,6 @@ const refresh = async (req, res) => {
 
 module.exports = {
   createUser,
-  users,
   drinkReviews,
   postReview,
   login,

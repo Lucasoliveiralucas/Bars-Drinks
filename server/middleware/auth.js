@@ -14,7 +14,7 @@ const authMiddleware = async (req, res, next) => {
     const { id } = jwt.verify(token, SECRET_KEY);
     // attempt to find user object and set to req
     const currentUser = await prisma.user.findFirst({
-      where: { email: req.body.email },
+      where: { id: id },
     });
     if (!currentUser) return res.sendStatus(401);
     req.user = currentUser;

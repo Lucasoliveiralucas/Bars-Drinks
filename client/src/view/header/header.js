@@ -4,7 +4,7 @@ import SearchBar from "./searchBar/searchBar";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../services/api";
 import { useEffect, useState } from "react";
-import Register from "../register/register";
+import Register from "./register/register";
 
 const Header = (props) => {
   const [categories, setCategories] = useState([]);

@@ -2,6 +2,7 @@
   display: flex;
   align-items: flex-end;
   margin-bottom: 3rem;
+  margin-left: 2rem;
 }
 .home-logged-out-list div {
   display: flex;
@@ -50,11 +51,19 @@
   display: flex;
   overflow: scroll;
   z-index: 1;
+  text-align: center;
 }
 .random-drink-img {
   margin-right: 1rem;
   position: relative;
+  flex-direction: column;
 }
+.random-drink-img svg {
+  position: relative;
+  margin-top: 3rem;
+  overflow: visible;
+}
+
 .random-drink-container-img::-webkit-scrollbar {
   display: none;
 }

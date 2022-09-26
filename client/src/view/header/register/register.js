@@ -2,8 +2,8 @@ import "./register.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-const { register } = require("../../services/api");
-const { loggedin } = require("../../redux/actions");
+const { register } = require("../../../services/api");
+const { loggedin } = require("../../../redux/actions");
 const Register = () => {
   const userDataStatus = useSelector((state) => state.userDataStatus);
   const dispatch = useDispatch();
@@ -39,7 +39,10 @@ const Register = () => {
   return (
     <>
       <button onClick={(e) => setDisplayRegister(!displayRegister)}>
-        Register
+        <b>
+          {" "}
+          <i>Register</i>
+        </b>
       </button>
       {displayRegister ? (
         <div className="register-container">

@@ -8,7 +8,11 @@ const LoggedIn = () => {
     console.log(userReviews);
   };
   getter();
-  return <div>hello {user.name}</div>;
+  return (
+    <h1 style={{ marginLeft: "5rem" }}>
+      Hello <i>{user.name}</i>
+    </h1>
+  );
 };
 
 export default LoggedIn;

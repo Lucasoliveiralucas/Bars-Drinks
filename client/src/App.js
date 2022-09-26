@@ -3,7 +3,6 @@ import "./App.css";
 import Home from "./view/home/home";
 import Details from "./view/details/details";
 import Header from "./view/header/header";
-import Register from "./view/register/register";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedin } from "./redux/actions";
@@ -29,7 +28,6 @@ function App() {
         <Routes>
           <Route path="/details/:id" element={<Details />}></Route>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/register" element={<Register />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

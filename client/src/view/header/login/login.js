@@ -11,9 +11,9 @@ const Login = () => {
     email: null,
     password: null,
   });
-  const handleSubmit = async (data) => {
-    data.preventDefault();
-    data.target.reset();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    event.target.reset();
     const res = await login(loginInfo);
     console.log(res);
     if (res.error) {
@@ -38,10 +38,14 @@ const Login = () => {
   return (
     <>
       {logged ? (
-        <button onClick={(e) => logout()}>logout</button>
+        <button onClick={(e) => logout()}>
+          <i>Logout</i>
+        </button>
       ) : (
         <div>
-          <button onClick={(e) => toggleLoginContainer()}>login</button>
+          <button onClick={(e) => toggleLoginContainer()}>
+            <i>Login</i>
+          </button>
           <div className={displayContainer}>
             <form onSubmit={(e) => handleSubmit(e)}>
               <h4>Email</h4>

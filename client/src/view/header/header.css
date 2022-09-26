@@ -52,3 +52,9 @@ input {
 .categories-container h3:hover {
   background-color: #628082;
 }
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #4f4b48;
+}
