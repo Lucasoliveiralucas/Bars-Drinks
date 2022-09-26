@@ -12,7 +12,6 @@ const {
 
 function Home() {
   const [popular, setPopular] = useState([]);
-  const [categories, setCategories] = useState([]);
   const { user, logged } = useSelector((state) => state.userDataStatus);
   const [barReviews, setBarReviews] = useState([]);
   const [popularReviews, setPopularReviews] = useState([]);
@@ -30,23 +29,11 @@ function Home() {
       const allReviews = await getAllReviews(drinkIdArray);
       setBarReviews(allReviews.bars);
       setPopularReviews(allReviews.drinks);
-      //get drink categories
-      const cat = await getCategories();
-      setCategories(cat.drinks);
     };
     getter();
   }, []);
   return (
     <div className="home">
-      {/* <div className="categories-container">
-        {categories ? (
-          categories.map((item) => <h2>{item.strCategory}</h2>)
-        ) : (
-          <></>
-        )}
-        <h2>Advanced Search</h2>
-        <h2>Surprise me!</h2>
-      </div> */}
       <div>
         {logged ? <LoggedIn /> : <LoggetOut barReviews={barReviews} />}
         <div className="drink-container-img">
