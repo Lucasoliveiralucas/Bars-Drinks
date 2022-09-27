@@ -75,60 +75,70 @@ const Rating = ({ drinkId, setReviews }) => {
     getter();
   }, []);
   return (
-    <div
-      style={{
-        backgroundColor: "#463F3A",
-        color: "white",
-        padding: "2rem",
-        paddingTop: "1rem",
-        borderRadius: "10px",
-      }}
-    >
-      <h1>Rate</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className="star-container">
+    <div style={{ textAlign: "center" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "0" }}>
+        Had this drink somewhere?
+      </h2>
+      <div
+        style={{
+          backgroundColor: "#BCB8B1",
+          color: "#F4F3EE",
+          padding: "2rem",
+          paddingTop: "1rem",
+          borderRadius: "10px",
+          justifyContent: "center",
+          verticalAlign: "middle",
+          display: "inline-flex",
+          marginTop: "0",
+        }}
+      >
+        <h2 style={{ marginTop: "0" }}>Rate:</h2>
+        <form onSubmit={(e) => handleSubmit(e)} style={{ marginLeft: "2rem" }}>
           <Stars hook={setRating} state={rating} setPopUp={setPopUp} />
-        </div>
-        <div className={`rating-popup-${popUp}`}>
-          <button id="close-rating" onClick={(e) => setPopUp(false)}>
-            X
-          </button>
-          <p>Bar</p>
-          <input
-            type="text"
-            name="bar"
-            placeholder="Bar..."
-            onChange={(e) => setwrittenBar(e.target.value)}
-            value={writtenBar}
-          ></input>
-          <div className="drink-container-text">
-            {barList ? (
-              barList.map((item) => (
-                <div className="drink-text" key={item}>
-                  <h4 onClick={(e) => setwrittenBar(item)}>{item}</h4>
-                </div>
-              ))
-            ) : (
-              <></>
-            )}
+
+          <div className={`rating-popup-${popUp}`}>
+            <button id="close-rating" onClick={(e) => setPopUp(false)}>
+              X
+            </button>
+            <p>Bar</p>
+            <input
+              type="text"
+              name="bar"
+              placeholder="Bar..."
+              onChange={(e) => setwrittenBar(e.target.value)}
+              value={writtenBar}
+            ></input>
+            <div className="drink-container-text">
+              {barList ? (
+                barList.map((item) => (
+                  <div className="drink-text" key={item}>
+                    <h4 onClick={(e) => setwrittenBar(item)}>{item}</h4>
+                  </div>
+                ))
+              ) : (
+                <></>
+              )}
+            </div>
+            <p>Comment</p>
+            <input
+              id="comment-input"
+              type="textarea"
+              name="comment"
+              placeholder="Write a comment..."
+              onChange={(e) =>
+                setRating({ ...rating, comment: e.target.value })
+              }
+            ></input>
+            <button
+              id="submit-rating"
+              type="submit"
+              onClick={(e) => setPopUp(false)}
+            >
+              Submit
+            </button>
           </div>
-          <p>Comment</p>
-          <input
-            id="comment-input"
-            type="textarea"
-            name="comment"
-            placeholder="Write a comment..."
-            onChange={(e) => setRating({ ...rating, comment: e.target.value })}
-          ></input>
-          <button
-            id="submit-rating"
-            type="submit"
-            onClick={(e) => setPopUp(false)}
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
