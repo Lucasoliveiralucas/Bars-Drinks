@@ -75,7 +75,15 @@ const Rating = ({ drinkId, setReviews }) => {
     getter();
   }, []);
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#463F3A",
+        color: "white",
+        padding: "2rem",
+        paddingTop: "1rem",
+        borderRadius: "10px",
+      }}
+    >
       <h1>Rate</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="star-container">

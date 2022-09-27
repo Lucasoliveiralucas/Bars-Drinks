@@ -47,7 +47,19 @@ const Details = () => {
   return (
     <div className="details-container">
       <div className="details-header">
-        <h1>{drink.strDrink}</h1>
+        <div
+          style={{
+            backgroundColor: "#463F3A",
+            color: "white",
+            padding: "2rem",
+            borderRadius: "10px",
+          }}
+        >
+          <h1>{drink.strDrink}</h1>
+          <h3>
+            <i>Best at {reviews[0].bar}</i>
+          </h3>
+        </div>
         <Rating drinkId={drink.idDrink} setReviews={setReviews} />
       </div>
       <div className="details-body">
@@ -93,7 +105,7 @@ const Details = () => {
         <div
           className="comments-container"
           style={{
-            backgroundColor: "#F4F3EE",
+            backgroundColor: "#463F3A",
             borderRadius: "10px",
             paddingLeft: "1rem",
             paddingRight: "1rem",
@@ -103,17 +115,20 @@ const Details = () => {
             item.comments ? (
               <div
                 style={{
-                  backgroundColor: "white",
+                  backgroundColor: "#8A817C",
                   borderRadius: "10px",
+                  color: "white",
                 }}
               >
-                <p>
+                <p style={{ padding: "0.5rem" }}>
                   <b>
                     <i>anonymus</i>
                   </b>{" "}
                   at <b>{item.bar}</b>
                 </p>
-                <h4 style={{ marginBottom: "3rem" }}>{item.comments}</h4>
+                <h4 style={{ marginBottom: "3rem", paddingBottom: "0.5rem" }}>
+                  {item.comments}
+                </h4>
               </div>
             ) : (
               <></>
