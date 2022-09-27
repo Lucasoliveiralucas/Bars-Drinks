@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Stars from "./stars/stars";
-const { postReview, getReview, getBars } = require("../../../services/api");
+const {
+  postReview,
+  getReview,
+  testGoogleAPI,
+} = require("../../../services/api");
 
 const Rating = ({ drinkId, setReviews }) => {
   const { user } = useSelector((state) => state.userDataStatus);
@@ -12,7 +16,9 @@ const Rating = ({ drinkId, setReviews }) => {
   const [rating, setRating] = useState({
     userId: null,
     drinkId: null,
-    bar: null,
+    barName: null,
+    barPrice: null,
+    barImage: null,
     score: null,
   });
 
@@ -35,20 +41,34 @@ const Rating = ({ drinkId, setReviews }) => {
     //display closest matches
     let buffer = [];
     if (writtenBar) {
-      bars.map((bar) => {
-        if (bar.poi.name.toLowerCase().includes(writtenBar.toLowerCase()))
-          buffer = [...buffer, bar.poi.name];
-      });
+      if (bars) {
+        bars.map((bar) => {
+          if (bar.name.toLowerCase().includes(writtenBar.toLowerCase())) {
+            buffer = [...buffer, bar];
+          }
+        });
+      }
       if (writtenBar.length < 2) buffer = [];
-      if (buffer[0]) setRating({ ...rating, bar: buffer[0] });
-      else setRating({ ...rating, bar: null });
-      setBarList(buffer);
+      if (buffer[0])
+        setRating({
+          ...rating,
+          barName: buffer[0].name,
+          barPrice: buffer[0].price_level,
+          barImage: buffer[0].photos[0].photo_reference,
+        });
+      else
+        setRating({ ...rating, barName: null, barPrice: null, barImage: null });
     } else setBarList([]);
+    let barListHolder = [];
+    buffer.forEach((el) => {
+      barListHolder = [...barListHolder, el.name];
+    });
+    setBarList(barListHolder);
   }, [writtenBar]);
   useEffect(() => {
     // data from api
     const getter = async () => {
-      const { results } = await getBars();
+      const results = await testGoogleAPI();
       setBar(results);
     };
     getter();

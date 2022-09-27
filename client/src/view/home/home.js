@@ -33,7 +33,8 @@ function Home() {
       <div
         style={{
           display: "flex",
-          backgroundColor: "#dec2b9",
+          backgroundColor: "#463F3A",
+          color: "white",
           marginTop: "3rem",
         }}
       >

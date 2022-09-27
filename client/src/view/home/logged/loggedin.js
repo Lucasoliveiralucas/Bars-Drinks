@@ -5,7 +5,7 @@ const LoggedIn = () => {
   const { user } = useSelector((state) => state.userDataStatus);
   const getter = async () => {
     const userReviews = await userData(user.email);
-    console.log(userReviews);
+    // console.log(userReviews);
   };
   getter();
   return (

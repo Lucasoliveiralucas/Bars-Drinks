@@ -1,14 +1,16 @@
 .home-logged-out {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 3rem;
   margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .home-logged-out-list div {
   display: flex;
 }
 .home-logged-out-list {
   margin-left: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 .home-logged-out .drink-container-img {
   width: 85vw;
@@ -90,4 +92,10 @@
 }
 .name-rating a {
   margin-right: 1rem;
+}
+.bar-review {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: dotted;
 }

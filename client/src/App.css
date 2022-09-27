@@ -45,13 +45,7 @@ input {
 .reviews-container {
   display: flex;
 }
-.bar-review {
-  display: flex;
-  align-items: center;
-}
-.bar-review h4 {
-  margin-right: 2rem;
-}
+
 svg {
   color: rgb(255, 157, 0);
   margin-right: 0.5rem;

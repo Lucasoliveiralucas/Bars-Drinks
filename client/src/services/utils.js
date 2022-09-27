@@ -4,13 +4,28 @@ const barReviewSorter = (reviews) => {
   //creates object with bars as keys and having a rating array
   reviews.forEach((el) => {
     obj[el.bar]
-      ? (obj[el.bar] = [...obj[el.bar], el.rating_])
-      : (obj[el.bar] = [el.rating_]);
+      ? (obj[el.bar] = {
+          ...obj[el.bar],
+          rating: [...obj[el.bar].rating, el.rating_],
+        })
+      : (obj[el.bar] = {
+          barImage: el.bar_image,
+          barPrice: el.bar_price,
+          rating: [el.rating_],
+        });
   });
   //formating object for easier operations
   for (const key in obj) {
     if (Object.hasOwnProperty.call(obj, key)) {
-      array = [...array, { bar: key, rating: obj[key] }];
+      array = [
+        ...array,
+        {
+          bar: key,
+          rating: obj[key].rating,
+          barImage: obj[key].barImage,
+          barPrice: obj[key].barPrice,
+        },
+      ];
     }
   }
   array.map((el, i) => {

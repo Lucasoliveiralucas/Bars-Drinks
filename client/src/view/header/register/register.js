@@ -40,7 +40,6 @@ const Register = () => {
     <>
       <button onClick={(e) => setDisplayRegister(!displayRegister)}>
         <b>
-          {" "}
           <i>Register</i>
         </b>
       </button>

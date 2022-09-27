@@ -83,7 +83,9 @@ const postReview = async (req, res) => {
       data: {
         drink_id: data.drinkId,
         rating_: +data.score,
-        bar: data.bar,
+        bar: data.barName,
+        bar_image: data.barImage,
+        bar_price: data.barPrice,
         User: {
           connect: { id: data.userId },
         },
@@ -121,7 +123,42 @@ const refresh = async (req, res) => {
     res.sendStatus(401);
   }
 };
+const findBarsGoogle = async (req, res) => {
+  var axios = require("axios");
 
+  var config = {
+    method: "get",
+    url: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.390%2C2.154&radius=6000&type=bar&keyword=drink&key=AIzaSyCPXO_rf1CXPCI_NB9VyhKtIeuSwmK6vz0",
+    headers: {},
+  };
+  try {
+    let data = await axios(config);
+    let result = JSON.stringify(data.data);
+    let parsedResult = JSON.parse(result);
+    let nextPageToken = parsedResult.next_page_token;
+    let returnData = parsedResult.results;
+    for (let i = 0; i < 1; i++) {
+      function delay(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+      }
+
+      await delay(2000);
+      var config = {
+        method: "get",
+        url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${nextPageToken}&key=AIzaSyCPXO_rf1CXPCI_NB9VyhKtIeuSwmK6vz0`,
+        headers: {},
+      };
+      data = await axios(config);
+      result = JSON.stringify(data.data);
+      parsedResult = JSON.parse(result);
+      returnData = [...returnData, ...parsedResult.results];
+    }
+    res.status(201);
+    res.json(JSON.stringify(returnData));
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   createUser,
   drinkReviews,
@@ -130,4 +167,5 @@ module.exports = {
   allDrinkReviews,
   userData,
   refresh,
+  findBarsGoogle,
 };

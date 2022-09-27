@@ -1,6 +1,7 @@
 const my_api = process.env.REACT_APP_MY_API;
 const RAPID_API_KEY = process.env.REACT_APP_RAPID_APIKEY;
 const OTHER_API_KEY = process.env.REACT_APP_OTHER_KEY;
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 const { barReviewSorter, drinkReviewSorter } = require("./utils");
 
 const getPopular = async () => {
@@ -92,7 +93,7 @@ const getAllReviews = async (drinkData) => {
     const res = await data.json();
     const barReviews = barReviewSorter(res);
     const drinkReviews = drinkReviewSorter(res, drinkData);
-    return { bars: barReviews.slice(0, 5), drinks: drinkReviews };
+    return { bars: barReviews, drinks: drinkReviews };
   } catch (error) {
     console.log(error);
   }
@@ -207,7 +208,11 @@ const getMultipleRandom = async () => {
     console.log(error);
   }
 };
-const testGoogleAPI = async () => {};
+const testGoogleAPI = async () => {
+  const data = await fetch(my_api + "bars");
+  const res = await data.json();
+  return JSON.parse(res);
+};
 module.exports = {
   getPopular,
   getSearch,
@@ -221,4 +226,5 @@ module.exports = {
   getAllReviews,
   userData,
   refreshUser,
+  testGoogleAPI,
 };

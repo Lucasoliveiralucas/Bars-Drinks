@@ -11,5 +11,6 @@ router.post("/review", authMiddleware, controller.postReview);
 router.get("/allreviews/", controller.allDrinkReviews);
 router.get("/refresh", authMiddleware, controller.refresh);
 router.post("/home/profile", authMiddleware, controller.userData);
+router.get("/bars", controller.findBarsGoogle);
 
 module.exports = router;
