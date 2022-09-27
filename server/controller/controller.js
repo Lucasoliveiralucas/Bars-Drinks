@@ -2,8 +2,10 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const axios = require("axios");
 const SECRET_KEY = process.env.SECRET_KEY;
 const SALT = process.env.SALT;
+const GOOGLE_API = process.env.GOOGLE_API_KEY;
 
 const createUser = async (req, res) => {
   try {
@@ -86,6 +88,7 @@ const postReview = async (req, res) => {
         bar: data.barName,
         bar_image: data.barImage,
         bar_price: data.barPrice,
+        user_comment: data.comment,
         User: {
           connect: { id: data.userId },
         },
@@ -124,11 +127,9 @@ const refresh = async (req, res) => {
   }
 };
 const findBarsGoogle = async (req, res) => {
-  var axios = require("axios");
-
   var config = {
     method: "get",
-    url: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.390%2C2.154&radius=6000&type=bar&keyword=drink&key=AIzaSyCPXO_rf1CXPCI_NB9VyhKtIeuSwmK6vz0",
+    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.390%2C2.154&radius=6000&type=bar&keyword=drink&key=${GOOGLE_API}`,
     headers: {},
   };
   try {
@@ -145,7 +146,7 @@ const findBarsGoogle = async (req, res) => {
       await delay(2000);
       var config = {
         method: "get",
-        url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${nextPageToken}&key=AIzaSyCPXO_rf1CXPCI_NB9VyhKtIeuSwmK6vz0`,
+        url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${nextPageToken}&key=${GOOGLE_API}`,
         headers: {},
       };
       data = await axios(config);
@@ -159,6 +160,26 @@ const findBarsGoogle = async (req, res) => {
     console.log(error);
   }
 };
+const findPhotosGoogle = async (req, res) => {
+  try {
+    // console.log(req.body[0]);
+    // var config = {
+    //   method: "get",
+    //   url: `https://maps.googleapis.com/maps/api/place/photo
+    //   ?maxwidth=400
+    //   &photo_reference=${req.body[0]}&key=${GOOGLE_API}`,
+    //   headers: {},
+    // };
+    // data = await axios(config);
+    // result = JSON.stringify(data.data);
+    // parsedResult = JSON.parse(result);
+    // console.log(parsedResult);
+    // res.status(201);
+    // res.json(JSON.stringify(returnData));
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   createUser,
   drinkReviews,
@@ -168,4 +189,5 @@ module.exports = {
   userData,
   refresh,
   findBarsGoogle,
+  findPhotosGoogle,
 };

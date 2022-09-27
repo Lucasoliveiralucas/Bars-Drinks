@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ReviewItem from "../../List/items/review-item";
+import Svg from "../../svg";
 import Rating from "./components/rating";
-const { getReview } = require("../../services/api");
+const { getReview, getPhotos } = require("../../services/api");
 const Details = () => {
   // const { id } = useParams();
   const [drink, setDrink] = useState([]);
@@ -39,6 +39,7 @@ const Details = () => {
     const getter = async () => {
       const data = await getReview(drink.idDrink);
       setReviews(data);
+      const photos = await getPhotos(data);
     };
     getter();
   }, [drink]);
@@ -80,10 +81,54 @@ const Details = () => {
           <h3>{drink.strInstructions}</h3>
         </div>
       </div>
-      <div className="reviews-container">
-        {reviews.map((item) => (
-          <ReviewItem data={item} key={item} />
-        ))}
+
+      <div
+        className="reviews-container"
+        style={{
+          borderTop: "dotted",
+          justifyContent: "space-between",
+          paddingTop: "1.5rem",
+        }}
+      >
+        <div
+          className="comments-container"
+          style={{
+            backgroundColor: "#F4F3EE",
+            borderRadius: "10px",
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
+          }}
+        >
+          {reviews.map((item) =>
+            item.comments ? (
+              <div
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "10px",
+                }}
+              >
+                <p>
+                  <b>
+                    <i>anonymus</i>
+                  </b>{" "}
+                  at <b>{item.bar}</b>
+                </p>
+                <h4 style={{ marginBottom: "3rem" }}>{item.comments}</h4>
+              </div>
+            ) : (
+              <></>
+            )
+          )}
+        </div>
+        <div>
+          {reviews.map((item) => (
+            <div>
+              <h4>{item.bar}</h4>
+              <Svg />
+              <h4>{item.rating}</h4>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

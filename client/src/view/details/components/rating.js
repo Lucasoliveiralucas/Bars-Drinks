@@ -19,6 +19,7 @@ const Rating = ({ drinkId, setReviews }) => {
     barName: null,
     barPrice: null,
     barImage: null,
+    comment: null,
     score: null,
   });
 
@@ -106,9 +107,10 @@ const Rating = ({ drinkId, setReviews }) => {
           <p>Comment</p>
           <input
             id="comment-input"
-            type="text"
+            type="textarea"
             name="comment"
             placeholder="Write a comment..."
+            onChange={(e) => setRating({ ...rating, comment: e.target.value })}
           ></input>
           <button
             id="submit-rating"

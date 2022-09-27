@@ -29,7 +29,9 @@
   height: 10rem;
   width: 40rem;
   display: flex;
-  border-bottom: dotted;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background-color: #f4f3ee;
 }
 
 .drink-img img {

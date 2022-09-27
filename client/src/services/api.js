@@ -209,9 +209,30 @@ const getMultipleRandom = async () => {
   }
 };
 const testGoogleAPI = async () => {
-  const data = await fetch(my_api + "bars");
-  const res = await data.json();
-  return JSON.parse(res);
+  try {
+    const data = await fetch(my_api + "bars");
+    const res = await data.json();
+    return JSON.parse(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+const getPhotos = async (barData) => {
+  try {
+    let photoId = [];
+    barData.forEach((element) => {
+      photoId.push(element.barImage);
+    });
+    const data = await fetch(my_api + "photos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(photoId),
+    });
+    const res = await data.json(photoId);
+    return JSON.parse(res);
+  } catch (error) {
+    console.log(error);
+  }
 };
 module.exports = {
   getPopular,
@@ -227,4 +248,5 @@ module.exports = {
   userData,
   refreshUser,
   testGoogleAPI,
+  getPhotos,
 };
