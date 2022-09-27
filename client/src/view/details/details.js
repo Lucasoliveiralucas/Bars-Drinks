@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Svg from "../../svg";
 import Rating from "./components/rating";
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+
 const { getReview, getPhotos } = require("../../services/api");
 const Details = () => {
   // const { id } = useParams();
@@ -9,6 +11,8 @@ const Details = () => {
   const [ingredients, setIngredients] = useState([]);
   const { state } = useLocation();
   const [reviews, setReviews] = useState([]);
+  const [bestBars, setBestBars] = useState([]);
+  const [photo, setPhoto] = useState([]);
   useEffect(() => {
     setDrink(state);
   }, [state]);
@@ -39,7 +43,9 @@ const Details = () => {
     const getter = async () => {
       const data = await getReview(drink.idDrink);
       setReviews(data);
+      setBestBars(data.slice(0, 5));
       const photos = await getPhotos(data);
+      setPhoto([photos]);
     };
     getter();
   }, [drink]);
@@ -67,6 +73,11 @@ const Details = () => {
               recipe
             </i>
           </h4>
+          {/* <img
+            src={`https://maps.googleapis.com/maps/api/place/photo
+            ?maxwidth=400
+            &photo_reference=Aap_uEA7vb0DDYVJWEaX3O-AtYp77AaswQKSGtDaimt3gt7QCNpdjp1BkdM6acJ96xTec3tsV_ZJNL_JP-lqsVxydG3nh739RE_hepOOL05tfJh2_ranjMadb3VoBYFvF0ma6S24qZ6QJUuV6sSRrhCskSBP5C1myCzsebztMfGvm7ij3gZT&key=${GOOGLE_API_KEY}`}
+          ></img> */}
           <div style={{ display: "flex", marginBottom: "4rem" }}>
             <img
               src={drink.strDrinkThumb}
@@ -84,14 +95,27 @@ const Details = () => {
             </div>
           </div>
         </div>
-        <div className="details-text">
+        <div
+          className="details-text"
+          style={{
+            backgroundColor: "#F4F3EE",
+            color: "#BCB8B1",
+            borderRadius: "10px",
+            paddingRight: "2rem",
+            marginBottom: "2rem",
+          }}
+        >
           <Rating drinkId={drink.idDrink} setReviews={setReviews} />
-          <div className="details-ingredients">
-            {reviews.map((item) => (
-              <div>
-                <h4>{item.bar}</h4>
-                <Svg />
-                <h4>{item.rating}</h4>
+          <div style={{ marginLeft: "2rem" }}>
+            {bestBars.map((item) => (
+              <div style={{ display: "flex" }}>
+                <h3 style={{ margin: "0", marginRight: "1rem" }}>{item.bar}</h3>
+                <div>
+                  <Svg />
+                </div>
+                <h4 style={{ margin: "0", marginBottom: "1.5rem" }}>
+                  {item.rating}
+                </h4>
               </div>
             ))}
           </div>

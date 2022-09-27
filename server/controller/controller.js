@@ -162,22 +162,27 @@ const findBarsGoogle = async (req, res) => {
 };
 const findPhotosGoogle = async (req, res) => {
   try {
-    // console.log(req.body[0]);
-    // var config = {
-    //   method: "get",
-    //   url: `https://maps.googleapis.com/maps/api/place/photo
-    //   ?maxwidth=400
-    //   &photo_reference=${req.body[0]}&key=${GOOGLE_API}`,
-    //   headers: {},
-    // };
-    // data = await axios(config);
-    // result = JSON.stringify(data.data);
-    // parsedResult = JSON.parse(result);
-    // console.log(parsedResult);
+    if (!req.body[0]) return;
+    console.log(req.body[0]);
+    // https://maps.googleapis.com/maps/api/place/photo
+    //  &photo_reference=${req.body[0]}&key=
+    var config = {
+      method: "get",
+      url: `https://maps.googleapis.com/maps/api/place/photo
+      ?maxwidth=400&maxheight=200
+      &photo_reference=Aap_uEA7vb0DDYVJWEaX3O-AtYp77AaswQKSGtDaimt3gt7QCNpdjp1BkdM6acJ96xTec3tsV_ZJNL_JP-lqsVxydG3nh739RE_hepOOL05tfJh2_ranjMadb3VoBYFvF0ma6S24qZ6QJUuV6sSRrhCskSBP5C1myCzsebztMfGvm7ij3gZT
+      &key=${GOOGLE_API}`,
+      headers: {},
+    };
+    data = await axios(config);
+    result = await JSON.stringify(data);
+    console.log(result);
+    // parsedResult = await JSON.parse(result);
+    // console.log(parsedResult.data);
     // res.status(201);
     // res.json(JSON.stringify(returnData));
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 module.exports = {

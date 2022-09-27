@@ -223,13 +223,14 @@ const getPhotos = async (barData) => {
     barData.forEach((element) => {
       photoId.push(element.barImage);
     });
-    const data = await fetch(my_api + "photos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(photoId),
-    });
-    const res = await data.json(photoId);
-    return JSON.parse(res);
+    // const data = await fetch(my_api + "photos", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(photoId),
+    // });
+    // const res = await data.json(photoId);
+    // return JSON.parse(res);
+    return photoId[0];
   } catch (error) {
     console.log(error);
   }

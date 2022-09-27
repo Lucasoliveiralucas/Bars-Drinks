@@ -81,8 +81,8 @@ const Rating = ({ drinkId, setReviews }) => {
       </h2>
       <div
         style={{
-          backgroundColor: "#BCB8B1",
-          color: "#F4F3EE",
+          // backgroundColor: "#BCB8B1",
+          // color: "#F4F3EE",
           padding: "2rem",
           paddingTop: "1rem",
           borderRadius: "10px",
