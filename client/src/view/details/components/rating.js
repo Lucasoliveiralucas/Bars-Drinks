@@ -100,7 +100,7 @@ const Rating = ({ drinkId, setReviews }) => {
             <button id="close-rating" onClick={(e) => setPopUp(false)}>
               X
             </button>
-            <p>Bar</p>
+            <p style={{ marginLeft: "0" }}>Bar</p>
             <input
               type="text"
               name="bar"
@@ -120,22 +120,33 @@ const Rating = ({ drinkId, setReviews }) => {
               )}
             </div>
             <p>Comment</p>
-            <input
-              id="comment-input"
-              type="textarea"
-              name="comment"
-              placeholder="Write a comment..."
-              onChange={(e) =>
-                setRating({ ...rating, comment: e.target.value })
-              }
-            ></input>
-            <button
-              id="submit-rating"
-              type="submit"
-              onClick={(e) => setPopUp(false)}
-            >
-              Submit
-            </button>
+            <div style={{ display: "block" }}>
+              <input
+                id="comment-input"
+                type="textarea"
+                name="comment"
+                placeholder="Write a comment..."
+                onChange={(e) =>
+                  setRating({ ...rating, comment: e.target.value })
+                }
+              ></input>
+              <h1></h1>
+              <button
+                style={{
+                  backgroundColor: "#BCB8B1",
+                  fontSize: "1rem",
+                  padding: "0.5rem",
+                  color: "#463F3A",
+                  borderRadius: "10px",
+                  float: "right",
+                  marginRight: "2.1rem",
+                }}
+                type="submit"
+                onClick={(e) => setPopUp(false)}
+              >
+                <b>Submit</b>
+              </button>
+            </div>
           </div>
         </form>
       </div>

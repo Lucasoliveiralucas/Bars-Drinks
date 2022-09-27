@@ -6,16 +6,17 @@ input {
 }
 
 .drink-container-text {
+  margin-left: 2.3rem;
   z-index: 3;
   position: absolute;
-  background-color: rgba(201, 201, 201, 0.92);
-  width: 19rem;
+  background-color: #bcb8b1e5;
+  width: 19.5rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 .drink-text h4 {
   margin-left: 1rem;
-  color: #2f3e46;
+  color: #463f3a;
   cursor: pointer;
 }
 #comment-input {
@@ -60,8 +61,8 @@ svg {
   padding-left: 1.5%;
   left: 35%;
   width: 30%;
-  height: 17rem;
-  background-color: rgba(166, 163, 163, 0.938);
+  height: 19.5rem;
+  background-color: #f4f3ee;
   position: absolute;
   border-radius: 5px;
 }
@@ -89,9 +90,10 @@ svg {
   background-color: transparent;
   margin: 0.5rem;
   float: right;
+  color: #463f3a;
 }
 #close-rating:hover {
-  background-color: rgb(214, 21, 21);
+  background-color: rgba(214, 21, 21, 0.713);
 }
 .rating-popup-true p {
   margin-top: 2rem;

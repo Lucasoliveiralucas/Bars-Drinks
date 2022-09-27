@@ -43,7 +43,16 @@ const Login = () => {
         </button>
       ) : (
         <div>
-          <button onClick={(e) => toggleLoginContainer()}>
+          <button
+            style={{
+              cursor: "pointer",
+              border: "none",
+              backgroundColor: "transparent",
+              marginTop: "1.3rem",
+              color: "white",
+            }}
+            onClick={(e) => toggleLoginContainer()}
+          >
             <i>Login</i>
           </button>
           <div className={displayContainer}>
