@@ -6,11 +6,11 @@ input {
 }
 
 .drink-container-text {
-  /* margin-left: 2.3rem; */
+  margin-left: 3.2rem;
   z-index: 3;
   position: absolute;
   background-color: #bcb8b1e5;
-  width: 20.3rem;
+  width: 29rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }

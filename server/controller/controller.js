@@ -26,8 +26,12 @@ const createUser = async (req, res) => {
     const hash = bcrypt.hashSync(password, +SALT);
     await prisma.user.create({
       data: {
-        ...req.body,
+        name: req.body.name,
+        email: req.body.email,
+        fav_components: req.body.fav_components,
         password: hash,
+        age: 18,
+        gender: "yes",
       },
     });
     const { id } = await prisma.user.findFirst({

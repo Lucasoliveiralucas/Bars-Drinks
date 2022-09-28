@@ -20,6 +20,7 @@ const Register = () => {
   const [displayRegister, setDisplayRegister] = useState(false);
   const [passwordCheck, setCheck] = useState("");
   const handleSubmit = async (e) => {
+    setDisplayRegister(!displayRegister);
     e.preventDefault();
     if (!registerData.name || !registerData.email || !registerData.password)
       return alert("Fill all Data");
@@ -32,7 +33,6 @@ const Register = () => {
       const { accessToken } = res;
       localStorage.setItem("accessToken", accessToken);
       dispatch(loggedin({ user: registerData, logged: true }));
-      navigate("/");
     }
     e.target.value.reset();
   };
