@@ -52,21 +52,17 @@ const Details = () => {
   useEffect(() => {
     const getter = async () => {
       const data = await getReview(drink.idDrink);
-      setReviews(data);
       setBestBars(data.slice(0, 5));
-      const photos = await getPhotos(data);
-      setPhoto([photos]);
     };
     getter();
-  }, []);
-
+  }, [reviews]);
   return (
     <div
       className="details-container"
       style={{ marginTop: "5rem", alignItems: "center" }}
     >
       <div className="details-body">
-        <div style={{ marginLeft: "2rem" }}>
+        <div style={{ marginLeft: "2rem", paddingRight: "30rem" }}>
           <div style={{ marginBottom: "2rem" }}>
             <h1 style={{ margin: "0", fontSize: "3rem" }}>{drink.strDrink}</h1>
             <h3>{reviews[0] ? <i>Best at {reviews[0].bar}</i> : <></>}</h3>
@@ -166,7 +162,7 @@ const Details = () => {
               >
                 <p style={{ padding: "0.5rem", color: "#BCB8B1" }}>
                   <b>
-                    <i>anonymus</i>
+                    <i>anonymous</i>
                   </b>{" "}
                   at <b>{item.bar}</b>
                 </p>

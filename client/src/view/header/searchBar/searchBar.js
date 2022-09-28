@@ -15,7 +15,9 @@ const SearchBar = () => {
       timeout.current = setTimeout(() => {
         const getter = async () => {
           const data = await getSearch(drink);
-          search ? setDisplay(data) : setDisplay([]);
+          search
+            ? setDisplay({ drinks: data.drinks.slice(0, 15) })
+            : setDisplay([]);
         };
         getter();
       }, 100);
