@@ -12,10 +12,10 @@ body {
     linear-gradient(225deg, #f4f3ee 25%, transparent 25%) -6px 0/ 12px 12px,
     linear-gradient(315deg, #f4f3ee55 25%, transparent 25%) 0px 0/ 12px 12px,
     linear-gradient(45deg, #f4f3ee 25%, #ffffff 25%) 0px 0/ 12px 12px;
-  color: #8a817c;
+  color: rgb(70, 63, 58);
 }
 a {
-  color: #8a817c;
+  color: rgb(70, 63, 58);
   text-decoration: none;
 }
 input:focus {

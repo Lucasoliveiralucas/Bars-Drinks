@@ -55,7 +55,10 @@ function Home() {
           {popular ? (
             popular.map((data) => (
               <div className="drink-img">
-                <img src={data.strDrinkThumb}></img>
+                <img
+                  src={data.strDrinkThumb}
+                  alt="an img was sopposed to be here"
+                ></img>
                 <div>
                   <Link
                     className="drink-img-text"

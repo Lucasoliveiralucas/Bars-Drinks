@@ -16,7 +16,7 @@ input {
 }
 .drink-text h4 {
   margin-left: 1rem;
-  color: #463f3a;
+  color: rgb(70, 63, 58);
   cursor: pointer;
 }
 #comment-input {

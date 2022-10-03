@@ -61,8 +61,8 @@ const Details = () => {
       className="details-container"
       style={{ marginTop: "5rem", alignItems: "center" }}
     >
-      <div className="details-body">
-        <div style={{ marginLeft: "2rem", paddingRight: "30rem" }}>
+      <div className="details-body" style={{ justifyContent: "space-between" }}>
+        <div style={{ marginLeft: "2rem" }}>
           <div style={{ marginBottom: "2rem" }}>
             <h1 style={{ margin: "0", fontSize: "3rem" }}>{drink.strDrink}</h1>
             <h3>{reviews[0] ? <i>Best at {reviews[0].bar}</i> : <></>}</h3>
@@ -89,6 +89,7 @@ const Details = () => {
               src={drink.strDrinkThumb}
               className="details-img"
               style={{ height: "10rem" }}
+              alt="an img was sopposed to be here"
             ></img>
             <div style={{ marginLeft: "2rem" }}>
               <h3 style={{ marginTop: "0" }}>Ingredients</h3>
@@ -97,7 +98,7 @@ const Details = () => {
                   {item.ingredient} - {item.measure}
                 </li>
               ))}
-              <h3>{drink.strInstructions}</h3>
+              <h3 style={{ maxWidth: "30rem" }}>{drink.strInstructions}</h3>
             </div>
           </div>
         </div>
