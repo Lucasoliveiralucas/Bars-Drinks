@@ -55,10 +55,22 @@ const Login = () => {
           >
             <i>Login</i>
           </button>
-          <div className={displayContainer}>
-            <form onSubmit={(e) => handleSubmit(e)}>
+          <div
+            className={displayContainer}
+            style={{
+              backgroundColor: "rgb(70, 63, 58)",
+              height: "15rem",
+              borderRadius: "10px",
+              width: "20rem",
+            }}
+          >
+            <form
+              onSubmit={(e) => handleSubmit(e)}
+              style={{ marginLeft: "1rem" }}
+            >
               <h4>Email</h4>
               <input
+                style={{ width: "17rem" }}
                 type="text"
                 name="email"
                 placeholder="Email"
@@ -68,6 +80,7 @@ const Login = () => {
               ></input>
               <h4>Password</h4>
               <input
+                style={{ width: "17rem" }}
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -76,14 +89,6 @@ const Login = () => {
                 }
               ></input>
               <div>
-                {/* <Link
-                  className="drink-img"
-                  to={`/register`}
-                  onClick={(e) => toggleLoginContainer()}
-                >
-                  Register
-                </Link> */}
-
                 <button type="submit">Sign in</button>
               </div>
             </form>
