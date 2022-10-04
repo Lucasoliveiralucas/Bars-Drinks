@@ -6,11 +6,10 @@ input {
 }
 
 .drink-container-text {
-  margin-left: 3.2rem;
   z-index: 3;
   position: absolute;
   background-color: #bcb8b1e5;
-  width: 29rem;
+  width: 20.2rem;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -62,7 +61,7 @@ svg {
   left: 35%;
   width: 30%;
   height: 19.5rem;
-  background-color: #f4f3ee;
+  background-color: #463f3a;
   position: absolute;
   border-radius: 5px;
 }

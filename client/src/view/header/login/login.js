@@ -68,6 +68,13 @@ const Login = () => {
               onSubmit={(e) => handleSubmit(e)}
               style={{ marginLeft: "1rem" }}
             >
+              <button
+                type="button"
+                onClick={(e) => toggleLoginContainer()}
+                style={{ marginRight: "1.5rem", float: "right" }}
+              >
+                X
+              </button>
               <h4>Email</h4>
               <input
                 style={{ width: "17rem" }}
@@ -89,7 +96,17 @@ const Login = () => {
                 }
               ></input>
               <div>
-                <button type="submit">Sign in</button>
+                <button
+                  style={{
+                    float: "right",
+                    marginRight: "1.5rem",
+                    marginTop: "1rem",
+                    fontSize: "1rem",
+                  }}
+                  type="submit"
+                >
+                  <i>Sign in</i>
+                </button>
               </div>
             </form>
           </div>
