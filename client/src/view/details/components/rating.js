@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Stars from "./stars/stars";
-const {
-  postReview,
-  getReview,
-  testGoogleAPI,
-} = require("../../../services/api");
+import { postReview, getReview, testGoogleAPI } from "../../../services/api";
 
 const Rating = ({ drinkId, setReviews }) => {
   const { user } = useSelector((state) => state.userDataStatus);

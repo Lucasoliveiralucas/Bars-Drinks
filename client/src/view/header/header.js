@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { getCategories } from "../../services/api";
 import { useEffect, useState } from "react";
 import Register from "./register/register";
-
+import { BiDrink } from "react-icons/bi";
 const Header = (props) => {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -19,7 +19,10 @@ const Header = (props) => {
   return (
     <div className="header">
       <div>
-        <Link to="/">Home</Link>
+        <Link to="/" style={{ marginLeft: "1rem", marginRight: "1rem" }}>
+          {" "}
+          <BiDrink color="rgb(244, 243, 238)" />
+        </Link>
         <div className="dropdown">
           <h1 className="dropbtn">CATEGORIES</h1>
           <div className="categories-container">
