@@ -96,13 +96,17 @@ const Rating = ({ drinkId, setReviews }) => {
             </button>
             <p style={{ marginLeft: "0" }}>Bar</p>
             <input
+              autoComplete="off"
               type="text"
               name="bar"
               placeholder="Bar..."
               onChange={(e) => setwrittenBar(e.target.value)}
               value={writtenBar}
             ></input>
-            <div className="drink-container-text">
+            <div
+              className="drink-container-text"
+              style={{ marginLeft: "2.6rem", width: "24.2vw" }}
+            >
               {barList ? (
                 barList.map((item) => (
                   <div className="drink-text" key={item}>
@@ -116,6 +120,7 @@ const Rating = ({ drinkId, setReviews }) => {
             <p>Comment</p>
             <div style={{ display: "block" }}>
               <input
+                autoComplete="off"
                 id="comment-input"
                 type="textarea"
                 name="comment"

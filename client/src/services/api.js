@@ -14,10 +14,10 @@ const getPopular = async () => {
       },
     };
     const data = await fetch(
-      "https://the-cocktail-db.p.rapidapi.com/popular.php",
-      options
+      "https://thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail"
     );
     const res = await data.json();
+    console.log(res);
     return res;
   } catch (error) {
     console.log(error);
@@ -28,15 +28,14 @@ const getSearch = async (drink) => {
   try {
     const options = {
       method: "GET",
-      headers: {
-        "X-RapidAPI-Key": RAPID_API_KEY,
-        "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
-      },
+      // headers: {
+      //   // "X-RapidAPI-Key": RAPID_API_KEY,
+      //   //   "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+      // },
     };
 
     const data = await fetch(
-      `https://the-cocktail-db.p.rapidapi.com/search.php?s=${drink}`,
-      options
+      `https://thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
     );
     const res = await data.json();
     return res;
@@ -173,13 +172,13 @@ const getCategories = async () => {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": RAPID_API_KEY,
-        "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+        key: `1`,
+        // "X-RapidAPI-Key": RAPID_API_KEY,
+        // "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
       },
     };
     const data = await fetch(
-      "https://the-cocktail-db.p.rapidapi.com/list.php?c=list",
-      options
+      "https://thecocktaildb.com/api/json/v1/1/list.php?c=list"
     );
     const res = await data.json();
     return res;
@@ -199,8 +198,7 @@ const getMultipleRandom = async () => {
     };
 
     const data = await fetch(
-      "https://the-cocktail-db.p.rapidapi.com/randomselection.php",
-      options
+      "https://thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink"
     );
     const res = await data.json();
     return res;
