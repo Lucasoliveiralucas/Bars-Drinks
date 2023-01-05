@@ -133,7 +133,7 @@ const refresh = async (req, res) => {
 const findBarsGoogle = async (req, res) => {
   var config = {
     method: "get",
-    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.390%2C2.154&radius=6000&type=bar&keyword=drink&key=${GOOGLE_API}`,
+    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-27.593%2C-48.558&radius=6000&type=bar&keyword=drink&key=${GOOGLE_API}`,
     headers: {},
   };
   try {
